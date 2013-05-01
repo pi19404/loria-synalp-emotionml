@@ -7,6 +7,7 @@ import javax.xml.stream.*;
 import org.w3c.dom.Element;
 
 import de.odysseus.staxon.json.*;
+import de.odysseus.staxon.json.stream.impl.JsonStreamFactoryImpl;
 
 import fr.loria.synalp.emotionml.exceptions.EmotionMLException;
 import fr.loria.synalp.emotionml.processors.*;
@@ -42,7 +43,7 @@ public class JsonEmotionMLExporter extends EmotionMLExporter
 		try
 		{
 			JsonXMLConfig config = new JsonXMLConfigBuilder().autoArray(true).autoPrimitive(true).prettyPrint(true).build();
-			JsonXMLOutputFactory jsonOutputFactory = new JsonXMLOutputFactory(config);
+			JsonXMLOutputFactory jsonOutputFactory = new JsonXMLOutputFactory(config, new JsonStreamFactoryImpl());
 			
 			// unfortunately we can't pass the node as a DOMSource so we have to write it as bytes first...
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
