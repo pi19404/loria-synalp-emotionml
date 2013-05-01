@@ -1,0 +1,19 @@
+
+<!-- 5.1.1 annotation of text -->
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml" xmlns:meta="http://www.example.com/metadata"
+	category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+	<info>
+		<meta:doc>Example adapted from (Zhang, Black & Sproat 2003) http://www.cs.cmu.edu/~awb/papers/eurospeech2003/esper.pdf
+		</meta:doc>
+	</info>
+
+	<emotion>
+		<category name="Disgust" value="0.82" />
+		‘Come, there’s no use in crying like that!’
+	</emotion>
+	said Alice to herself rather sharply;
+	<emotion>
+		<category name="Anger" value="0.57" />
+		‘I advise you to leave off this minute!’
+	</emotion>
+</emotionml>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!-- 5.2.2 use with ssml -->
+<speak version="1.1" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:emo="http://www.w3.org/2009/10/emotionml"
+	xml:lang="en-US">
+	<s>
+		<emo:emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+			<emo:category name="worried" value="0.4" />
+		</emo:emotion>
+
+		Do you need help?
+	</s>
+</speak>

@@ -1,0 +1,9 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="fear">
+			<trace freq="100 Hz" samples="0.1 0.1 0.15 0.2 0.2 0.25 0.25 0.25 test 0.3 0.35 0.5 0.7 0.8 0.85 0.85" />
+		</category>
+	</emotion>
+
+</emotionml>

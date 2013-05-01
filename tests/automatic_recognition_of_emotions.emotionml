@@ -1,0 +1,31 @@
+
+<!-- 5.1.2 Automatic recognition of emotions -->
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml" category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+	...
+	<emotion start="1006526160000" expressed-through="face">
+		<!--the first modality detects excitement. It is a camera observing the face. A URI to the database is provided to access 
+			the video stream. -->
+		<category name="excited" />
+		<reference uri="http://www.example.com/facedb#t=26,98" />
+	</emotion>
+
+	<emotion start="1006526160000" expressed-through="facial-skin-color">
+		<!--the second modality detects anger. It is an IR camera observing the face. A URI to the database is provided to access 
+			the video stream. -->
+		<category name="angry" />
+		<reference uri="http://www.example.com/skindb#t=23,108" />
+	</emotion>
+
+	<emotion start="1006526160000" expressed-through="physiology">
+		<!--the third modality detects excitement again. It is a wearable device monitoring physiological changes in the body. 
+			A URI to the database is provided to access the data stream. -->
+		<category name="excited" />
+		<reference uri="http://www.example.com/physiodb#t=19,101" />
+	</emotion>
+
+	<emotion start="1006526520000" expressed-through="physiology">
+		<category name="angry" />
+		<reference uri="http://www.example.com/physiodb2#t=2,6" />
+	</emotion>
+	...
+</emotionml>

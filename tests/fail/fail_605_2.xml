@@ -1,0 +1,11 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<vocabulary id="voc1" type="category">
+		<item name="joy"/>
+	</vocabulary>
+	
+	<vocabulary id="voc1" type="category">
+		<item name="joy"/>
+	</vocabulary>
+
+</emotionml>

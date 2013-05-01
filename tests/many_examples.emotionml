@@ -1,0 +1,121 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<!-- 2.2.1 category -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+		<category name="satisfied" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="sadness" value="0.3" />
+		<category name="anger" value="0.8" />
+		<category name="fear" value="0.3" />
+	</emotion>
+
+	<!-- 2.2.2 dimension -->
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#pad-dimensions">
+		<dimension name="arousal" value="0.3" /><!-- lower-than-average arousal -->
+		<dimension name="pleasure" value="0.9" /><!-- very high positive valence -->
+		<dimension name="dominance" value="0.8" /><!-- relatively high potency -->
+	</emotion>
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#intensity-dimension">
+		<dimension name="intensity" value="0.2" /><!-- not in a strong emotional state -->
+	</emotion>
+
+	<!-- 2.2.3 appraisal -->
+	<emotion appraisal-set="http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals">
+		<appraisal name="suddenness" value="0.8" />
+		<appraisal name="intrinsic-pleasantness" value="0.2" />
+	</emotion>
+
+	<!-- 2.2.4 action tendency -->
+	<emotion action-tendency-set="http://www.w3.org/TR/emotion-voc/xml#frijda-action-tendencies">
+		<action-tendency name="approach" value="0.7" />   <!-- get close -->
+		<action-tendency name="being-with" value="0.8" /> <!-- be happy -->
+		<action-tendency name="attending" value="0.7" />  <!-- pay attention -->
+		<action-tendency name="dominating" value="0.7" /> <!-- be assertive -->
+	</emotion>
+
+	<!-- 2.3.1 confidence -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="surprise" confidence="0.95" />
+	</emotion>
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#pad-dimensions">
+		<dimension name="arousal" value="0.8" confidence="0.9" />
+		<dimension name="pleasure" value="0.6" confidence="0.3" />
+	</emotion>
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#intensity-dimension">
+		<dimension name="intensity" value="0.1" confidence="0.8" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories" dimension-set="http://www.w3.org/TR/emotion-voc/xml#intensity-dimension">
+		<category name="bored" confidence="0.1" />
+		<dimension name="intensity" value="0.1" confidence="0.8" />
+	</emotion>
+
+	<!-- 2.3.2 expressed through -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories" expressed-through="voice">
+		<category name="satisfied" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories" expressed-through="face voice">
+		<category name="satisfied" />
+	</emotion>
+
+	<!-- 2.4.2.1 absolute time -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6" start="1268647332000" end="1268647334000">
+		<category name="surprise" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6" start="1268647334001" end="1268647336000">
+		<category name="happiness" />
+	</emotion>
+
+	<!-- 2.4.2.2 duration -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6" start="1268647200000" duration="130">
+		<category name="surprise" />
+	</emotion>
+
+	<!-- 2.4.2.3 relative time -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6" time-ref-uri="#my_session_id"
+		offset-to-start="2000">
+		<category name="surprise" />
+	</emotion>
+
+	<!-- 2.4.2.4 timing in media -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="happiness" />
+		<reference uri="myAudio.wav#t=3,9" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="happiness" />
+		<reference uri="myVideo.avi#t=smpte-30:0:02:00,0:02:01:15" />
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="happiness" />
+		<reference uri="myVideo.avi#t=clock:2009-07-26T11:19:01Z,2009-07-26T11:20:01Z" />
+	</emotion>
+
+	<!-- 2.5.1 value -->
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions">
+		<dimension name="arousal" value="0.4" /> <!-- a bit less than average arousal -->
+		<dimension name="valence" value="0.6" /> <!-- a bit above average valence -->
+	</emotion>
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+		<category name="angry" value="0.5" /> <!-- anger at medium intensity -->
+	</emotion>
+	<emotion appraisal-set="http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals">
+		<appraisal name="suddenness" value="0.9" /> <!-- appraisal as a very sudden event -->
+	</emotion>
+	<emotion action-tendency-set="http://www.w3.org/TR/emotion-voc/xml#frijda-action-tendencies">
+		<action-tendency name="approach" value="0.3" /> <!-- a rather weak tendency to approach -->
+	</emotion>
+
+	<!-- 2.5.2 trace -->
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="fear">
+			<trace freq="10Hz" samples="0.1 0.1 0.15 0.2 0.2 0.25 0.25 0.25 0.3 0.3 0.35 0.5 0.7 0.8 0.85 0.85" />
+		</category>
+	</emotion>
+	<emotion appraisal-set="http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals">
+		<appraisal name="suddenness" confidence="0.75">
+			<trace freq="10Hz" samples="0.1 0.1 0.1 0.1 0.1 0.7 0.8 0.8 0.8 0.8 0.4 0.2 0.1 0.1 0.1" />
+		</appraisal>
+	</emotion>
+
+</emotionml>

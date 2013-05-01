@@ -1,0 +1,8 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<emotion dimension-set="http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions">
+		<info id="a:a"/>
+		<dimension name="valence" value="0.5"/>
+	</emotion>
+	
+</emotionml>

@@ -1,0 +1,8 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+		<category name="fear"/>
+		<reference uri="http://datypic.com#frag1#frag2"/>
+	</emotion>
+	
+</emotionml>

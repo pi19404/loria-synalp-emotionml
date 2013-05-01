@@ -1,0 +1,42 @@
+
+<!-- 5.2.1 use with emma -->
+<emma:emma version="1.0" xmlns:emma="http://www.w3.org/2003/04/emma" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<emma:derivation>
+
+		<emma:interpretation id="text1" emma:start="1245790094000" emma:end="1245790095000" emma:mode="voice"
+			emma:verbal="true" emma:signal="http://example.com/signals/emo123.wav" emma:process="http://example.com/text_analysis.xml">
+			<emma:literal>I feel happy</emma:literal>
+			<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+				<category name="content" value="0.7" confidence="0.7" />
+			</emotion>
+		</emma:interpretation>
+
+		<emma:interpretation id="voice1" emma:start="1245790094000" emma:end="1245790095000" emma:mode="voice"
+			emma:verbal="false" emma:signal="http://example.com/signals/emo123.wav" emma:process="http://example.com/voice_analysis.xml">
+			<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+				<category name="amused" value="0.4" confidence="0.5" />
+			</emotion>
+		</emma:interpretation>
+
+		<emma:interpretation id="video1" emma:start="1245790090000" emma:end="1245790100000" emma:mode="video"
+			emma:verbal="false" emma:signal="http://example.com/signals/emo123.mpg" emma:process="http://example.com/video_analysis.xml">
+			<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+				<category name="content" value="0.5" confidence="0.7" />
+			</emotion>
+		</emma:interpretation>
+
+	</emma:derivation>
+
+
+	<emma:interpretation id="multimodal1" emma:start="1245790094000" emma:end="1245790100000"
+		emma:medium="acoustic visual" emma:mode="voice video">
+		<emma:derived-from resource="#text1" composite="true" />
+		<emma:derived-from resource="#voice1" composite="true" />
+		<emma:derived-from resource="#video1" composite="true" />
+		<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+			<category name="content" value="0.6" confidence="0.7" />
+		</emotion>
+	</emma:interpretation>
+
+</emma:emma>
