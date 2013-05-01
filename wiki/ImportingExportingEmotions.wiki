@@ -7,7 +7,7 @@ We show here some basic examples on how to build and export emotions. These exam
 
 == Example 1 - Basic emotion ==
 
-This example shows how to build an emotion using a predefined vocabulary of categories called Big6. When adding such predefined category, the advantage is that the category-set of the emotion is automatically setup. It would not be the case when building an emotion with a custom name.
+This example shows how to build an emotion using a predefined vocabulary of categories called [https://loria-synalp-emotionml.googlecode.com/svn/trunk/doc/index.html?fr/loria/synalp/emotionml/vocabularies/predefined/Big6.html Big6]. When adding such predefined category, the advantage is that the category-set of the emotion is automatically setup. It would not be the case when building an emotion with a custom name.
 {{{
 Emotion emotion = new Emotion(Big6.FEAR);
 new EmotionMLExporter().export(emotion, System.out);
