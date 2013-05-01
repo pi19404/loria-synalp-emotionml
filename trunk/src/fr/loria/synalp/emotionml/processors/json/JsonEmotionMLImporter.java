@@ -7,6 +7,7 @@ import javax.xml.stream.*;
 import org.w3c.dom.Element;
 
 import de.odysseus.staxon.json.*;
+import de.odysseus.staxon.json.stream.impl.JsonStreamFactoryImpl;
 import fr.loria.synalp.emotionml.exceptions.EmotionMLException;
 import fr.loria.synalp.emotionml.processors.*;
 
@@ -41,7 +42,7 @@ public class JsonEmotionMLImporter extends EmotionMLImporter
 		try
 		{
 			JsonXMLConfig config = new JsonXMLConfigBuilder().autoArray(true).autoPrimitive(true).prettyPrint(true).build();
-			JsonXMLInputFactory jsonFactory = new JsonXMLInputFactory(config);
+			JsonXMLInputFactory jsonFactory = new JsonXMLInputFactory(config, new JsonStreamFactoryImpl());
 
 			// we should find a better way to get the element
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
