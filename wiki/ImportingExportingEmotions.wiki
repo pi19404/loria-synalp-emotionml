@@ -166,6 +166,8 @@ And the exported emotion like this (the lengthy URI has been randomly generated 
 </emotion>
 }}}
 
+Note that this emotion is only valid locally. If one would distribute it as such, the category-set URI would not be resolved and would produce an exception. 
+
 == Example 8 - We can also embed the emotion and vocabulary in a document ==
 
 Another possibility is to export not an emotion but a whole emotion document that contains both a vocabulary and an emotion that refers to this vocabulary locally. The only difference is that we add both the vocabulary and the emotion to the same document. To refer to the vocabulary inside the same document, the category-set URI only needs the fragment identifier (#`fragment`). When exporting the whole document, no exception is thrown. But note that if we would export the sole emotion, an exception would be thrown.
