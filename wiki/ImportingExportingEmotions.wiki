@@ -1,10 +1,6 @@
 #summary This page explains how to import/export emotions
 
-
-
 = Exporting emotions =
-
-
 
 We show here some basic examples on how to build and export emotions. These examples can be found in the [https://loria-synalp-emotionml.googlecode.com/svn/trunk/doc/index.html?fr/loria/synalp/emotionml/examples/package-summary.html fr.loria.synalp.emotionml.examples] package.
 
@@ -96,7 +92,7 @@ emotion.setCategorySetURI("http://myvocabularies#mycategories");
 new EmotionMLExporter().export(emotion, System.out); // exception thrown because the URI cannot be resolved
 }}}
 
-It produces the given to-be-improved error message:
+It produces the to-be-improved given error message:
 
 {{{
 fr.loria.synalp.emotionml.exceptions.EmotionMLValidationException: schema validated; 
