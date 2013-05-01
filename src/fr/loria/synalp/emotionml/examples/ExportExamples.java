@@ -262,9 +262,6 @@ public class ExportExamples
 			emotion.add(new Reference(new URI("myvideo.mpeg"), "video/mpeg", Role.EXPRESSED_BY));
 
 			Timestamp timestamp = new Timestamp();
-			timestamp.setStart(0);
-			timestamp.setEnd(20000);
-			timestamp.setDuration(500);
 			timestamp.setOffsetToStart(300);
 			timestamp.setTimeRefURI(new URI("#mysessionId"));
 			timestamp.setTimeRefAnchorPoint(TimeRefAnchorPoint.START);
