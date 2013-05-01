@@ -33,6 +33,7 @@ An important feature of EmotionML is how it handles vocabulary references using 
 
 We show here some basic examples on how to build and export emotions. These examples can be found in the fr.loria.synalp.emotionml.examples package.
 
+
 == Example 1 - Basic emotion ==
 
 This example shows how to build an emotion using a predefined vocabulary of categories called Big6. When adding such predefined category, the advantage is that the category-set of the emotion is automatically setup. It would not be the case when building an emotion with a custom name.
@@ -41,25 +42,57 @@ Emotion emotion = new Emotion(Big6.FEAR);
 new EmotionMLExporter().export(emotion, System.out);
 }}}
 
+It produces:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotion xmlns="http://www.w3.org/2009/10/emotionml"
+         category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+    <category name="fear"/>
+</emotion>
+}}}
+
 
 == Example 2 - Compound emotion ==
 
-This example shows that it is possible to combine a category like Big6.FEAR and a dimension like FsreDimensions.AROUSAL.
+This example shows that it is possible to combine a category like `Big6.FEAR` and a dimension like `FsreDimensions.AROUSAL`. By default predefined dimensions have a value of 1.
 {{{
 Emotion emotion = new Emotion(Big6.FEAR, FsreDimensions.AROUSAL);
 new EmotionMLExporter().export(emotion, System.out);
 }}}
 
+It produces:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotion xmlns="http://www.w3.org/2009/10/emotionml"
+         category-set="http://www.w3.org/TR/emotion-voc/xml#big6" 
+         dimension-set="http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions">
+    <category name="fear"/>
+    <dimension name="arousal" value="1.0"/>
+</emotion>
+}}}
+
 
 == Example 3 - We cannot have two categories from two vocabularies ==
 
-However it is not possible to mix two categories from two different vocabularies. For instance, when trying to export an emotion with Big6.FEAR and EverydayCategories.AFRAID, the exporter throws an exception.
+However it is not possible to mix two categories from two different vocabularies. For instance, when trying to export an emotion with `Big6.FEAR` and `EverydayCategories.AFRAID`, the exporter throws an exception.
 {{{
 Emotion emotion = new Emotion(Big6.FEAR, EverydayCategories.AFRAID);
 new EmotionMLExporter().export(emotion, System.out); // exception thrown because Big6.FEAR has no category-set
 }}}
-Note that what really happens is that first Big6.FEAR is added to the emotion and the category-set URI of the emotion is setup to refer to the Big6 vocabulary, then EveryDayCategories.AFRAID is added, and the category-set URI is replaced such that it refers now to the EveryDayCategories vocabulary. But when exporting, the Big6.FEAR category has no more category-set URI and the exception is thrown.
+
+It produces the rather lengthy error message:
+{{{
+fr.loria.synalp.emotionml.exceptions.EmotionMLValidationException: schema validated; 
+assertion invalidated: 212: The value of the "name" attribute of the <category> element MUST be contained in the declared 
+category vocabulary (the name is "fear" but the declared names for 
+"http://www.w3.org/TR/emotion-voc/xml#everyday-categories" are [satisfied, sad, bored, angry, excited, amused, loving, 
+interested, disappointed, content, afraid, worried, relaxed, confident, happy, affectionate, pleased])
+}}}
+
+Note that what really happens is that first `Big6.FEAR` is added to the emotion and the category-set URI of the emotion is setup to refer to the Big6 vocabulary, then `EveryDayCategories.AFRAID` is added, and the category-set URI is replaced such that it refers now to the EveryDayCategories vocabulary. But when exporting, the `Big6.FEAR` category has no more category-set URI and the exception is thrown.
   
+The exception states that the produced XML output satisfies the schema constraints (see [http://www.w3.org/TR/emotionml/#schema EmotionML schema]) but does not satisfy the assertion 212 (see [http://www.w3.org/2002/mmi/2013/emotionml-ir/#test_class EmotionML assertions]).
+
 
 == Example 4 - A custom category needs a category-set ==
 
@@ -69,10 +102,17 @@ Emotion emotion = new Emotion(new Category("love"));
 new EmotionMLExporter().export(emotion, System.out); // exception thrown, category "love" has no category-set
 }}}
 
+It produces the given error message:
+{{{
+fr.loria.synalp.emotionml.exceptions.EmotionMLValidationException: schema validated; 
+assertion invalidated: 210: If the <category> element is used, a category vocabulary MUST be declared using a 
+"category-set" attribute on either the enclosing <emotion> element or the root element <emotionml> (the <emotion> has 
+none and has no <emotionml> parent)
+}}}
 
 == Example 5 - A category-set needs to refer to a vocabulary ==
 
-We can set the category-set manually by calling the setCategorySetURI method, however this URI needs to refer to a valid vocabulary as defined EmotionML (see [http://www.w3.org/TR/emotionml/#s3 Defining vocabularies for representing emotions]). The vocabulary needs to meet some additional constraints, it needs to be accessible online, needs to be a vocabulary of type "category" and needs to contain our category name, namely "love". Providing a fake URI such as http://myvocabularies#mycategories" will thus fail and throw an exception when exporting as in the following example:
+We can set the category-set manually by calling the `setCategorySetURI` method, however this URI needs to refer to a valid vocabulary as defined EmotionML (see [http://www.w3.org/TR/emotionml/#s3 Defining vocabularies for representing emotions]). The vocabulary needs to meet some additional constraints, it needs to be accessible online, needs to be a vocabulary of type "category" and needs to contain our category name, namely "love". Providing a fake URI such as http://myvocabularies#mycategories" will thus fail and throw an exception when exporting as in the following example:
 
 {{{
 Emotion emotion = new Emotion(new Category("love"));
@@ -80,6 +120,13 @@ emotion.setCategorySetURI("http://myvocabularies#mycategories");
 new EmotionMLExporter().export(emotion, System.out); // exception thrown because the URI cannot be resolved
 }}}
 
+It produces the given to-be-improved error message:
+
+{{{
+fr.loria.synalp.emotionml.exceptions.EmotionMLValidationException: schema validated; 
+assertion invalidated: Unable to retrieve vocabulary from URI <http://myvocabularies#mycategories>, check the URL 
+since there has been an IO exception while opening the stream: myvocabularies
+}}}
 
 == Example 6 - We can bypass the vocabulary resolution ==
 
@@ -110,7 +157,7 @@ EmotionMLDocument doc = new EmotionMLDocument();
 doc.add(vocabulary);    
 
 // and write the doc    
-File file = File.createTempFile("myvocabularies", ".tmp");
+File file = File.createTempFile("myvocabularies", ".xml");
 exporter.export(doc, file);
 
 // we could now safely refer to the love Category
@@ -120,6 +167,24 @@ emotion.setCategorySetURI(file.toURI() + "#" + myVocabularyId);
 new EmotionMLExporter().export(emotion, System.out); // no exception but it would be better to save the doc somewhere else
 }}}
 
+The vocabulary document looks like this:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml" version="1.0"> 
+    <vocabulary id="mycategories" type="category">
+        <item name="love"/>
+        <item name="hate"/>
+    </vocabulary>
+</emotionml>
+}}}
+And the exported emotion like this (the lengthy URI has been randomly generated when creating temporary file):
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotion xmlns="http://www.w3.org/2009/10/emotionml"
+         category-set="file:/var/folders/z2/r6j9bq216vlc2jd4xm2chkd40000gn/T/myvocabularies7856475978942376452.xml#mycategories" >
+    <category name="love"/>
+</emotion>
+}}}
 
 == Example 8 - We can also embed the emotion and vocabulary in a document ==
 
@@ -171,7 +236,7 @@ new EmotionMLExporter().export(emotion, System.out);
 
 == Example 10 - Export to JSON ==
 
-While not part of the EmotionML specification, the library also provides import/export from JSON. The library uses StAXON and its mapping convention (see [https://github.com/beckchr/staxon/wiki/Mapping-Convention Mapping convention in StAXON) to export JSON from XML and import XML from JSON. Instead of using EmotionMLExporter, one has to use JsonEmotionMLExporter as the following example shows:
+While not part of the EmotionML specification, the library also provides import/export from JSON. The library uses StAXON and its mapping convention (see [https://github.com/beckchr/staxon/wiki/Mapping-Convention Mapping convention in StAXON]) to export JSON from XML and import XML from JSON. Instead of using EmotionMLExporter, one has to use JsonEmotionMLExporter as the following example shows:
 
 {{{
 Emotion emotion = new Emotion(new Dimension(FsreDimensions.VALENCE, 0.2f));
