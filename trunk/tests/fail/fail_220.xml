@@ -1,0 +1,7 @@
+<emotionml version="1.0" xmlns="http://www.w3.org/2009/10/emotionml">
+
+	<emotion>
+		<dimension name="valence" value="1.0"/>
+	</emotion>
+	
+</emotionml>

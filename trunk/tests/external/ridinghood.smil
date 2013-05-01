@@ -1,0 +1,18 @@
+
+<!-- 5.2.3 use with smil -->
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <head> ... </head>
+  <body>
+    <par duration="8s">
+      <img src="file:forest.jpg"/>
+      <smileText>The little girl was enjoying the walk in the forest.</smileText>
+      <ref src="file:ridinghood.emotionml#emotion1"/>
+    </par>
+    <par duration="5s">
+      <img src="file:wolf.jpg"/>
+      <smileText>Suddenly a dark shadow appeared in front of her.</smileText>
+      <ref src="file:ridinghood.emotionml#emotion2"/>
+    </par>
+
+  </body>
+</smil>

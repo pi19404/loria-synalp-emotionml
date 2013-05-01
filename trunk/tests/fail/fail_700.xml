@@ -1,0 +1,7 @@
+<em:emotionml version="1.0" xmlns:em="http://www.w3.org/2009/10/emotionml">
+
+	<em:vocabulary id="test" type="category">
+		<item name="joy" />
+	</em:vocabulary>
+
+</em:emotionml>

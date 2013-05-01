@@ -1,0 +1,16 @@
+
+<!-- 5.2.3 use with smil -->
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml"
+    category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories"
+    appraisal-set="http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals">
+
+  <emotion id="emotion1">
+    <category name="content" value="0.7"/>
+  </emotion>
+
+  <emotion id="emotion2" expressed-through="face voice">
+    <category name="afraid" value="0.9"/>
+    <appraisal name="suddenness" value="0.9"/>
+    <appraisal name="intrinsic-pleasantness" value="0.1"/>
+  </emotion>
+</emotionml>

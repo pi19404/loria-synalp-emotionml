@@ -1,0 +1,12 @@
+
+<!-- 5.2.1 use with emma -->
+<emma:emma version="1.0" xmlns:emma="http://www.w3.org/2003/04/emma" xmlns="http://www.w3.org/2009/10/emotionml">
+	<emma:interpretation emma:start="1245790094000" emma:end="1245790095000" emma:mode="voice"
+		emma:verbal="false">
+
+		<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#everyday-categories">
+			<category name="bored" value="0.1" confidence="0.1" />
+		</emotion>
+
+	</emma:interpretation>
+</emma:emma>
