@@ -287,8 +287,7 @@ public class ExportExamples
 		System.out.println("\n\n------- Example10");
 		
 		Dimension dimension = new Dimension(FsreDimensions.VALENCE, 0.2f);
-		dimension.setConfidence(0.8f);
-
+		
 		Emotion emotion = new Emotion(dimension);
 		System.out.println(emotion+"\n");
 
