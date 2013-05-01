@@ -60,7 +60,7 @@ category vocabulary (the name is "fear" but the declared names for
 interested, disappointed, content, afraid, worried, relaxed, confident, happy, affectionate, pleased])
 }}}
 
-Note that what really happens is that first `Big6.FEAR` is added to the emotion and the category-set URI of the emotion is setup to refer to the Big6 vocabulary, then `EveryDayCategories.AFRAID` is added, and the category-set URI is replaced such that it refers now to the EveryDayCategories vocabulary. But when exporting, the `Big6.FEAR` category has no more category-set URI and the exception is thrown.
+Note that what really happens is that first `Big6.FEAR` is added to the emotion and the category-set URI of the emotion is setup to refer to the `Big6` vocabulary, then `EveryDayCategories.AFRAID` is added, and the category-set URI is replaced such that it refers now to the `EveryDayCategories` vocabulary. But when exporting, the `Big6.FEAR` category has no more category-set URI and the exception is thrown.
   
 The exception states that the produced XML output satisfies the schema constraints (see [http://www.w3.org/TR/emotionml/#schema EmotionML schema]) but does not satisfy the assertion 212 (see [http://www.w3.org/2002/mmi/2013/emotionml-ir/#test_class EmotionML assertions]).
 
