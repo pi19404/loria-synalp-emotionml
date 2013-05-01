@@ -2,7 +2,7 @@
 
 = Exporting emotions =
 
-We show here some basic examples on how to build and export emotions. These examples can be found in the fr.loria.synalp.emotionml.examples package.
+We show here some basic examples on how to build and export emotions. These examples can be found in the [https://loria-synalp-emotionml.googlecode.com/svn/trunk/doc/index.html?fr/loria/synalp/emotionml/examples/package-summary.html fr.loria.synalp.emotionml.examples package].
 
 
 == Example 1 - Basic emotion ==
