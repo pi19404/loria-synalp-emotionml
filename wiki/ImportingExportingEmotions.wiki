@@ -140,6 +140,14 @@ EmotionMLExporter exporter = new EmotionMLExporter(new EmotionMLValidator().setR
 exporter.export(emotion, System.out); // no more exception
 }}}
 
+It produces the invalid output:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotion category-set="http://myvocabularies#mycategories" xmlns="http://www.w3.org/2009/10/emotionml">
+    <category name="love"/>
+</emotion>
+}}}
+
 
 == Example 7 - Or we can create a vocabulary document ==
 
@@ -181,7 +189,7 @@ And the exported emotion like this (the lengthy URI has been randomly generated 
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <emotion xmlns="http://www.w3.org/2009/10/emotionml"
-         category-set="file:/var/folders/z2/r6j9bq216vlc2jd4xm2chkd40000gn/T/myvocabularies7856475978942376452.xml#mycategories" >
+ category-set="file:/var/folders/z2/r6j9bq216vlc2jd4xm2chkd40000gn/T/myvocabularies7856475978942376452.xml#mycategories" >
     <category name="love"/>
 </emotion>
 }}}
@@ -208,6 +216,19 @@ doc.add(emotion);
 new EmotionMLExporter().export(doc, System.out); // no exception since the vocabulary is contained in the same document
 }}}
 
+It would produce the given document:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml" version="1.0">
+    <vocabulary id="mycategories" type="category">
+        <item name="love"/>
+        <item name="hate"/>
+    </vocabulary>
+    <emotion category-set="#mycategories">
+        <category name="love"/>
+    </emotion>
+</emotionml>
+}}}
 
 == Example 9 - An example of emotion ==
 
@@ -233,6 +254,20 @@ emotion.setTimestamp(timestamp);
 new EmotionMLExporter().export(emotion, System.out);
 }}}
 
+It would produces:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<emotion xmlns="http://www.w3.org/2009/10/emotionml"
+         dimension-set="http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions"
+         offset-to-start="300"
+         time-ref-uri="#mysessionId"
+         time-ref-anchor-point="start" 
+         expressed-through="face eyebrows">
+    <dimension confidence="0.8" name="valence">
+        <trace freq="100.0Hz" samples="0.1 0.2 0.3"/>
+    </dimension>
+    <reference media-type="video/mpeg" role="expressedBy" uri="myvideo.mpeg"/>this is sad but gets better</emotion>
+}}}
 
 == Example 10 - Export to JSON ==
 
@@ -246,6 +281,19 @@ String json = new JsonEmotionMLExporter().export(emotion);
 emotion = new JsonEmotionMLImporter().importEmotion(json);
 }}} 
 
+It will produce:
+{{{
+{
+	"emotion": {
+		"@xmlns": "http://www.w3.org/2009/10/emotionml",
+		"@dimension-set": "http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions",
+		"dimension": {
+			"@name": "valence",
+			"@value": "0.2"
+		}
+	}
+}
+}}}
 
 == Example 11 - But no textual content ==
 
@@ -255,4 +303,10 @@ Note that exporting to JSON has one restriction. It cannot export emotions that 
 Emotion emotion = new Emotion(Big6.SADNESS);
 emotion.setText(new EmotionText("Alas, I will throw an exception when exporting in JSON..."));
 new JsonEmotionMLExporter().export(emotion, System.out); // exception thrown because of mixed content
+}}}
+
+It would produce the given error message:
+{{{
+fr.loria.synalp.emotionml.exceptions.EmotionMLException: Unable to write the given Element in JSON: Mixed content is not 
+supported: 'Alas, I will throw an exception when exporting in JSON...'
 }}}
