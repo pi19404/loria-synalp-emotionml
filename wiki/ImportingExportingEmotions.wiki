@@ -1,9 +1,14 @@
 #summary This page explains how to import/export emotions
 
+
+
 = Exporting emotions =
+
+
 
 We show here some basic examples on how to build and export emotions. These examples can be found in the [https://loria-synalp-emotionml.googlecode.com/svn/trunk/doc/index.html?fr/loria/synalp/emotionml/examples/package-summary.html fr.loria.synalp.emotionml.examples] package.
 
+<wiki:toc max_depth="2" />
 
 == Example 1 - Basic emotion ==
 
