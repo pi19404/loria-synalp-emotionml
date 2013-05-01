@@ -201,7 +201,7 @@ It produces the given document:
 </emotionml>
 }}}
 
-== Example 9 - An example of emotion ==
+== Example 9 - An example of complex emotion ==
 
 So far so good, we can now look at a more complex emotion. This one has one dimension called "valence" with a trace information and a high confidence. It is expressed through the face modality, more precisely the eyebrows and is attached to a text. The emotion is expressed in a mpeg video. It has independent relative timestamp:
 
