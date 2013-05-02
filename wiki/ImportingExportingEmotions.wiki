@@ -271,7 +271,7 @@ It will produce:
 
 == Example 11 - But no textual content ==
 
-Note that exporting to JSON has one restriction. It cannot export emotions that contains textual information.
+Note that exporting to JSON has one restriction. It cannot export emotions that contains textual information. 
 
 {{{
 Emotion emotion = new Emotion(Big6.SADNESS);
@@ -284,3 +284,5 @@ It produces the given error message:
 fr.loria.synalp.emotionml.exceptions.EmotionMLException: Unable to write the given Element in JSON: Mixed content is not 
 supported: 'Alas, I will throw an exception when exporting in JSON...'
 }}}
+
+There are two ways to workaround that restriction. First, one can embed the emotion in another JSON parent element that holds both the text and the emotion which would then be siblings. Second, one can make use of the info element of EmotionML and include the text inside that info element.
