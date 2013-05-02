@@ -1,0 +1,33 @@
+#summary This page explains how to import/export custom info elements
+
+= Info elements =
+
+One interesting feature about EmotionML is that it is possible to embed external information inside an emotion, a vocabulary, a vocabulary item or a whole document. This external information is represented as an &lt;info&gt;. For instance:
+
+The following example shows an emotionml document whose &lt;info&gt; element holds non-EmotionML information, namely a classifier information. The same document contains two emotions whose &lt;info&gt; elements contain non-EmotionML information related to localization:
+{{{
+<emotionml xmlns="http://www.w3.org/2009/10/emotionml"
+        xmlns:classifiers="http://www.example.com/meta/classify/"
+        xmlns:origin="http://www.example.com/meta/local/"
+        category-set="http://www.w3.org/TR/emotion-voc/xml#big6"
+        version="1.0">
+    <info>
+        <classifiers:classifier classifiers:name="GMM"/>
+    </info>
+
+    <emotion>
+        <info><origin:localization value="bavarian"/></info>
+        <category name="happiness"/>
+    </emotion>
+
+    <emotion>
+        <info><origin:localization value="swabian"/></info>
+        <category name="sadness"/>
+    </emotion>
+</emotionml>
+}}}
+ 
+
+= Exporting =
+
+= Importing =
