@@ -30,7 +30,7 @@ class CustomImporter extends EmotionMLImporter
 			}
 		}
 		
-		return new Info();
+		return super.importInfo(element);
 	}
 
 }
