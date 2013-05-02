@@ -62,7 +62,7 @@ interested, disappointed, content, afraid, worried, relaxed, confident, happy, a
 }}}
 
 Note that what really happens is that first `Big6.FEAR` is added to the emotion and the category-set URI of the emotion is setup to refer to the `Big6` vocabulary, then `EveryDayCategories.AFRAID` is added, and the category-set URI is replaced such that it refers now to the `EveryDayCategories` vocabulary. But when exporting, the `Big6.FEAR` category has no more category-set URI and the exception is thrown.
-  
+ 
 The exception states that the produced XML output satisfies the schema constraints (see [http://www.w3.org/TR/emotionml/#schema EmotionML schema]) but does not satisfy the assertion 212 (see [http://www.w3.org/2002/mmi/2013/emotionml-ir/#test_class EmotionML assertions]).
 
 
@@ -286,3 +286,27 @@ supported: 'Alas, I will throw an exception when exporting in JSON...'
 }}}
 
 There are two ways to workaround that restriction. First, one can embed the emotion in another JSON parent element that holds both the text and the emotion which would then be siblings. Second, one can make use of the info element of EmotionML and include the text inside that info element.
+
+
+= Importing emotions =
+
+Importing emotions consists in producing a Java object from an emotionml document or standalone emotion. It is simpler than exporting emotions since the emotion is already built in EmotionML. One has to create an instance of EmotionMLImporter, and choose wether to import the given input as an emotionml document or as a standalone emotion.
+
+For an emotionml document:
+{{{
+EmotionMLDocument doc = new EmotionMLImporter().importDocument(file);
+}}}
+
+For a standalone emotion:
+{{{
+Emotion emotion = new EmotionMLImporter().importEmotion(file);
+}}}
+
+As for the export, the input is tested against EmotionML constraints. All the situations that we mentioned while exporting could happen when importing as well. For instance, when trying to import an emotion with a category without category-set, an EmotionMLValidationException will be thrown. 
+
+The validation process being the same when importing or exporting, it is also possible to deactivate the vocabulary resolution when importing:
+
+{{{
+EmotionMLImporter importer = new EmotionMLImporter(new EmotionMLValidator().setResolveVocabularies(false));
+Emotion emotion = importer.importEmotion(file);
+}}}
