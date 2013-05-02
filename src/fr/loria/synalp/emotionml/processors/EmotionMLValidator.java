@@ -282,6 +282,7 @@ public class EmotionMLValidator
 	 */
 	private void validateEmotionMLVersion(Element root) throws EmotionMLFormatException
 	{
+		// this has been temporarily disabled to prevent failure for http://www.w3.org/TR/emotion-voc/xml
 		/*String version = root.getAttribute("version");
 		if (version.equals(""))
 			throw new EmotionMLFormatException("110: The root element of a standalone EmotionML document MUST have an attribute \"version\"");
