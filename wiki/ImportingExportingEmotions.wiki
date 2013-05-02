@@ -112,7 +112,7 @@ EmotionMLExporter exporter = new EmotionMLExporter(new EmotionMLValidator().setR
 exporter.export(emotion, System.out); // no more exception
 }}}
 
-It produces the invalid output:
+It produces the *invalid* output:
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <emotion category-set="http://myvocabularies#mycategories" xmlns="http://www.w3.org/2009/10/emotionml">
@@ -161,7 +161,7 @@ And the exported emotion like this (the lengthy URI has been randomly generated 
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <emotion xmlns="http://www.w3.org/2009/10/emotionml"
- category-set="file:/var/folders/z2/r6j9bq216vlc2jd4xm2chkd40000gn/T/myvocabularies7856475978942376452.xml#mycategories" >
+ category-set="file:/var/folders/z2/r6j9bq216vlc2jd4xm2chkd40000gn/T/myvocabularies7856475978942376452.xml#mycategories">
     <category name="love"/>
 </emotion>
 }}}
