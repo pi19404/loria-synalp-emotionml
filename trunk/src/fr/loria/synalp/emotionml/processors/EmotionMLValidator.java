@@ -95,23 +95,39 @@ public class EmotionMLValidator
 	 */
 	public Element validateDocument(Element element) throws EmotionMLValidationException
 	{
-		// 1- validate schema
-		boolean isSchemaValid = validateSchema(element);
-		String schemaErrorMessage = errorMessage;
-
-		// 2- validate assertions
+		boolean isSchemaValid = true;
+		boolean isAssertionValid = true;
+		String schemaErrorMessage = "";
+		String assertionErrorMessage = "";
+		
 		identifiers = new HashSet<String>();
 		resolver.setLocalDocument(element.getOwnerDocument());
+		
+		// 1- validate schema
+		try
+		{
+			validateSchema(element);
+		}
+		catch(Exception e)
+		{
+			isSchemaValid = false;
+			schemaErrorMessage = e.getLocalizedMessage();
+		}
+		
+		// 2- validate assertions
 		try
 		{
 			validateDocumentPrivate(element);
 		}
-		catch (EmotionMLException e)
+		catch(Exception e)
 		{
-			throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, false, e.getLocalizedMessage()));
+			isAssertionValid = false;
+			assertionErrorMessage = e.getLocalizedMessage();
 		}
-
-		return element;
+		
+		if (isSchemaValid && isAssertionValid)
+			return element;
+		else throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, isAssertionValid, assertionErrorMessage));
 	}
 
 
@@ -123,23 +139,39 @@ public class EmotionMLValidator
 	 */
 	public Element validateEmotion(Element element) throws EmotionMLValidationException
 	{
-		// 1- validate schema
-		boolean isSchemaValid = validateSchema(element);
-		String schemaErrorMessage = errorMessage;
-
-		// 2- validate assertions
+		boolean isSchemaValid = true;
+		boolean isAssertionValid = true;
+		String schemaErrorMessage = "";
+		String assertionErrorMessage = "";
+		
 		identifiers = new HashSet<String>();
 		resolver.setLocalDocument(null);
+		
+		// 1- validate schema
+		try
+		{
+			validateSchema(element);
+		}
+		catch(Exception e)
+		{
+			isSchemaValid = false;
+			schemaErrorMessage = e.getLocalizedMessage();
+		}
+		
+		// 2- validate assertions
 		try
 		{
 			validateEmotionPrivate(element);
 		}
-		catch (EmotionMLException e)
+		catch(Exception e)
 		{
-			throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, false, e.getLocalizedMessage()));
+			isAssertionValid = false;
+			assertionErrorMessage = e.getLocalizedMessage();
 		}
-
-		return element;
+		
+		if (isSchemaValid && isAssertionValid)
+			return element;
+		else throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, isAssertionValid, assertionErrorMessage));
 	}
 
 
@@ -148,20 +180,12 @@ public class EmotionMLValidator
 	/**
 	 * Validates the document against the EmotionML schema.
 	 * @param doc
+	 * @throws IOException 
+	 * @throws SAXException 
 	 */
-	private boolean validateSchema(Node doc)
+	private void validateSchema(Node doc) throws SAXException, IOException
 	{
-		try
-		{
-			schema.newValidator().validate(new DOMSource(doc));
-			errorMessage = "";
-			return true;
-		}
-		catch (Exception e)
-		{
-			errorMessage = e.getLocalizedMessage();
-			return false;
-		}
+		schema.newValidator().validate(new DOMSource(doc));
 	}
 
 
@@ -505,14 +529,16 @@ public class EmotionMLValidator
 	private void validateEmotionId(Element emotion) throws EmotionMLFormatException
 	{
 		String id = emotion.getAttribute("id");
-		if (!id.equals("") && id.indexOf(":") != -1) // should fine a proper definition of xsd:ID, unicity ?
-			throw new EmotionMLFormatException("174: The \"id\" attribute of <emotion>, if present, MUST " +
-												"be of type xsd:ID (it is\"" + id + "\")");
-
-		if (identifiers.contains(id))
-			throw new EmotionMLFormatException("174: The \"id\" attribute of <emotion>, if present, MUST " +
-												"be of type xsd:ID (it is\"" + id + "\" and there already exists an element with that identifier)");
-		else identifiers.add(id);
+		if (!id.equals(""))
+		{
+			if (id.indexOf(":") != -1) // TODO: a proper definition of xsd:ID
+				throw new EmotionMLFormatException("174: The \"id\" attribute of <emotion>, if present, MUST " +
+													"be of type xsd:ID (it is \"" + id + "\")");
+			if (identifiers.contains(id))
+				throw new EmotionMLFormatException("174: The \"id\" attribute of <emotion>, if present, MUST " +
+													"be of type xsd:ID (it is \"" + id + "\" and there already exists an element with that identifier)");
+			else identifiers.add(id);
+		}
 	}
 
 
@@ -797,14 +823,17 @@ public class EmotionMLValidator
 	private void validateInfoId(Element info) throws EmotionMLFormatException
 	{
 		String id = info.getAttribute("id");
-		if (!id.equals("") && id.indexOf(":") != -1) // should fine a proper definition of xsd:ID, unicity ?
-			throw new EmotionMLFormatException("306: The \"id\" attribute of the <info> element, if present, MUST be of type " +
-												"xsd:ID (it is \"" + id + "\")");
+		if (!id.equals(""))
+		{
+			if (id.indexOf(":") != -1) // TODO: a proper definition of xsd:ID
+				throw new EmotionMLFormatException("306: The \"id\" attribute of the <info> element, if present, MUST be of type " +
+													"xsd:ID (it is \"" + id + "\")");
 
-		if (identifiers.contains(id))
-			throw new EmotionMLFormatException("306: The \"id\" attribute of the <info> element, if present, MUST be of type " +
-												"xsd:ID (it is \"" + id + "\" and there already exists an element with that identifier)");
-		else identifiers.add(id);
+			if (identifiers.contains(id))
+				throw new EmotionMLFormatException("306: The \"id\" attribute of the <info> element, if present, MUST be of type " +
+													"xsd:ID (it is \"" + id + "\" and there already exists an element with that identifier)");
+			else identifiers.add(id);
+		}
 	}
 
 
