@@ -41,7 +41,6 @@ public class EmotionMLValidator
 	private static final String MEDIATYPES_FILE = "/fr/loria/synalp/emotionml/schemas/mediatypes.txt";
 
 	private Schema schema;
-	private String errorMessage;
 	private VocabularyResolver resolver;
 	private boolean resolveVocabularies = true;
 	private Set<String> identifiers;
