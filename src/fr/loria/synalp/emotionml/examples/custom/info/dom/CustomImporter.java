@@ -2,6 +2,7 @@ package fr.loria.synalp.emotionml.examples.custom.info.dom;
 
 import org.w3c.dom.*;
 
+import fr.loria.synalp.emotionml.exceptions.EmotionMLException;
 import fr.loria.synalp.emotionml.info.Info;
 import fr.loria.synalp.emotionml.processors.EmotionMLImporter;
 
@@ -13,7 +14,7 @@ class CustomImporter extends EmotionMLImporter
 {
 
 	@Override
-	public Info importInfo(Element element)
+	public Info importInfo(Element element) throws EmotionMLException
 	{
 		NodeList children = element.getChildNodes();
 		for(int i=0; i<children.getLength(); i++)

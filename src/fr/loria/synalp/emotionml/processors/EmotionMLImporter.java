@@ -174,8 +174,9 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Element is well defined with respect to EmotionML standard.
 	 * @param element
 	 * @return an EmotionMLDocument corresponding to given DOM Element
+	 * @throws EmotionMLException 
 	 */
-	public EmotionMLDocument importDocument(Element element)
+	public EmotionMLDocument importDocument(Element element) throws EmotionMLException
 	{
 		EmotionMLDocument ret = new EmotionMLDocument();
 
@@ -218,8 +219,9 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * defined with respect to EmotionML standard.
 	 * @param element
 	 * @return an Emotion corresponding to given DOM Element
+	 * @throws EmotionMLException 
 	 */
-	public Emotion importEmotion(Element element)
+	public Emotion importEmotion(Element element) throws EmotionMLException
 	{
 		Emotion ret = new Emotion();
 
@@ -270,8 +272,9 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as an Info.
 	 * @param element
 	 * @return an Info corresponding to given DOM Element
+	 * @throws EmotionMLException 
 	 */
-	public Info importInfo(Element element)
+	public Info importInfo(Element element) throws EmotionMLException
 	{
 		String id = element.getAttribute("id");
 		if (id.equals(""))
@@ -284,8 +287,9 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as a Vocabulary.
 	 * @param element
 	 * @return a Vocabulary
+	 * @throws EmotionMLException 
 	 */
-	public Vocabulary importVocabulary(Element element)
+	public Vocabulary importVocabulary(Element element) throws EmotionMLException
 	{
 		String id = element.getAttribute("id");
 		VocabularyType type = VocabularyType.parse(element.getAttribute("type"));
@@ -312,8 +316,9 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as a VocabularyItem
 	 * @param element
 	 * @return a VocabularyItem
+	 * @throws EmotionMLException 
 	 */
-	private VocabularyItem importVocabularyItem(Element element)
+	private VocabularyItem importVocabularyItem(Element element) throws EmotionMLException
 	{
 		VocabularyItem ret = new VocabularyItem(element.getAttribute("name"));
 
