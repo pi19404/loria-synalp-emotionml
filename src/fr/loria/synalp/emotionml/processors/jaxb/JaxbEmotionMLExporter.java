@@ -10,7 +10,7 @@ import com.sun.xml.internal.bind.v2.runtime.IllegalAnnotationsException;
 
 import fr.loria.synalp.emotionml.exceptions.EmotionMLException;
 import fr.loria.synalp.emotionml.info.Info;
-import fr.loria.synalp.emotionml.processors.EmotionMLExporter;
+import fr.loria.synalp.emotionml.processors.*;
 
 /**
  * A JaxbEmotionMLExporter is an EmotionMLExporter that exports Info objects using JAXB.
@@ -18,6 +18,26 @@ import fr.loria.synalp.emotionml.processors.EmotionMLExporter;
  */
 public class JaxbEmotionMLExporter extends EmotionMLExporter
 {
+
+	/**
+	 * Creates a new JaxbEmotionMLExporter.
+	 */
+	public JaxbEmotionMLExporter()
+	{
+		super();
+	}
+
+
+	/**
+	 * Creates a new JaxbEmotionMLExporter based on given EmotionMLValidator.
+	 * @param validator
+	 */
+	public JaxbEmotionMLExporter(EmotionMLValidator validator)
+	{
+		super(validator);
+	}
+
+
 	/**
 	 * Exports the given Info instance as a DOM element belonging to the given Document. If the
 	 * given instance is of class Info, a simple &lt;info&gt; element is produced. If the given
