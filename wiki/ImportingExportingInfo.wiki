@@ -161,7 +161,7 @@ class CustomImporter extends EmotionMLImporter
 
 Building the importer and exporter classes using DOM can be a tedious task. It is also possible to use JAXB to import and export Info objects. The idea is to annotate the Info classes with JAXB annotations that define how the fields have to be serialized. There are at least two constraints on the Info classes:
   * they need to contain an empty constructor
-  * they need to contain a @XmlRootElement annotation that defines a namespace different from the EmotionML namespace ("http://www.w3.org/2009/10/emotionml")
+  * they need to contain a `@XmlRootElement` annotation that defines a namespace different from the EmotionML namespace ("http://www.w3.org/2009/10/emotionml")
 
 Our classes would then be:
 {{{
