@@ -26,9 +26,11 @@ The following example shows an emotionml document whose `<info>` element holds n
     </emotion>
 </emotionml>
 }}}
- 
 
-= Representation =
+
+= Using DOM = 
+
+== Representation ==
 
 To work with such Info elements in Java, one would just need to subclass the Info class. For instance, the classifier info could be represented as the following minimal class:
 
@@ -65,7 +67,7 @@ Emotion emotion = new Emotion(new Category(Big6.HAPPINESS)).setInfo(new Localiza
 }}}
 
 
-= Exporting =
+== Exporting ==
 
 In order to export these info instances, it is required to tell explicitly how these are to be serialized. There is no restriction on how to serialize, one can use any kind of tool or method. The only requirements imposed by EmotionML is that the `<info>` elements do not contain EmotionML elements, and that any element in it has a different namespace than the default EmotionML namespace ("http://www.w3.org/2009/10/emotionml"). If XML is not needed to represent the information, one can also serialize it as plain text inside the `<info>` element.
 
@@ -121,7 +123,7 @@ When exporting our emotion, it would return the result:
 Note that it is not perfect, we could have a prefix "origin" like in the example.
 
 
-= Importing =
+== Importing ==
 
 Importing works the same way than exporting by subclassing the `EmotionMLImporter` class and overriding the `importInfo` method. 
 
@@ -150,3 +152,65 @@ class CustomImporter extends EmotionMLImporter
         return super.importInfo(element);
     }   
 } 
+}}}
+
+= Using JAXB =
+
+Building the importer and exporter classes using DOM can be a tedious task. It is also possible to use JAXB to import and export Info objects. The idea is to annotate the Info classes with JAXB annotations that define how the fields have to be serialized. There are at least two constraints on the Info classes:
+  * they need to contain an empty constructor
+  * they need to contain a @XmlRootElement annotation that defines a namespace different from the EmotionML namespace ("http://www.w3.org/2009/10/emotionml")
+
+Our classes would then be:
+{{{
+@XmlRootElement(name="classifier", namespace="http://www.example.com/meta/classify/")
+class ClassifierInfo extends Info
+{
+    @XmlAttribute
+    String name;
+
+    ClassifierInfo(String name)
+    {   
+        this.name = name; 
+    }   
+}
+}}}
+
+and:
+{{{
+@XmlRootElement(name="localization", namespace="http://www.example.com/meta/local/")
+class LocalizationInfo extends Info
+{
+    @XmlAttribute
+    String value;
+
+    LocalizationInfo(String value)
+    {   
+        this.value = value; 
+    }   
+}
+}}}
+
+Once the classes have be defined like this, exporting the emotion is quite simple and relies on a `JaxbEmotionMLExporter` instance:
+{{{
+Emotion emotion = new Emotion(new Category(Big6.HAPPINESS)).setInfo(new LocalizationInfo("bavarian"));
+
+new JaxbEmotionMLExporter().export(emotion, System.out);
+}}}
+
+which will produce the same output than previously:
+{{{
+<emotion category-set="http://www.w3.org/TR/emotion-voc/xml#big6">
+    <info>
+        <localization value="bavarian" xmlns="http://www.example.com/meta/local/"/>
+    </info>
+    <category name="happiness"/>
+</emotion>
+}}}
+
+Importing is slightly more complex than exporting since JAXB requires to know to which classes the XML elements will be unmarshalled. To do the import, an instance of class `JaxbEmotionMLImporter' needs to be created, and the method `addInfoClasses' needs to be called with each of the Info classes we want to unmarshall to: 
+
+{{{
+JaxbEmotionMLImporter importer = new JaxbEmotionMLImporter().addInfoClasses(ClassifierInfo.class, LocalizationInfo.class);
+}}}
+
+Once done, the Jaxb importer works the same way than other importers.
