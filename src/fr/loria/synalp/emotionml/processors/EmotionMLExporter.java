@@ -197,7 +197,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @param info
 	 * @return a DOM Element representing the given Info
 	 */
-	public Element exportInfo(Info info, Document doc)
+	public Element exportInfo(Info info, Document doc) throws EmotionMLException
 	{
 		Element ret = doc.createElementNS(NAMESPACE, "info");
 		if (info.hasId())
@@ -212,7 +212,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @return a Document whose root is &lt;emotionml&gt;
 	 * @throws EmotionMLValidationException
 	 */
-	public Element export(EmotionMLDocument emotionDocument, Document doc) throws EmotionMLValidationException
+	public Element export(EmotionMLDocument emotionDocument, Document doc) throws EmotionMLValidationException, EmotionMLException
 	{
 		Element root = doc.createElementNS(NAMESPACE, "emotionml");
 		doc.appendChild(root);
@@ -244,7 +244,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @param doc
 	 * @return
 	 */
-	private Node export(EmotionNode emotionNode, Document doc)
+	private Node export(EmotionNode emotionNode, Document doc) throws EmotionMLException
 	{
 		if (emotionNode instanceof EmotionText)
 			return export((EmotionText) emotionNode, doc);
@@ -276,7 +276,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @param doc an owner document
 	 * @return a DOM element representing given Emotion
 	 */
-	public Element export(Emotion emotion, Document doc)
+	public Element export(Emotion emotion, Document doc) throws EmotionMLException
 	{
 		Element ret = doc.createElementNS(NAMESPACE, "emotion");
 
@@ -421,7 +421,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @param doc
 	 * @return
 	 */
-	private Element export(Vocabulary vocabulary, Document doc)
+	private Element export(Vocabulary vocabulary, Document doc) throws EmotionMLException
 	{
 		Element ret = doc.createElementNS(NAMESPACE, "vocabulary");
 		if (vocabulary.hasInfo())
@@ -440,7 +440,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	 * @param doc
 	 * @return
 	 */
-	private Element export(VocabularyItem item, Document doc)
+	private Element export(VocabularyItem item, Document doc) throws EmotionMLException
 	{
 		Element ret = doc.createElementNS(NAMESPACE, "item");
 		if (item.hasInfo())
