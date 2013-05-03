@@ -14,12 +14,12 @@ import fr.loria.synalp.emotionml.processors.*;
 /**
  * A JaxbEmotionMLImporter imports &lt;info&gt; elements as Info object with JAXB. When using
  * subclasses of Info, it is required that each of these classes is bound to this
- * JaxbEmotionMLImporter by calling the addClassToBeBounds method.
+ * JaxbEmotionMLImporter by calling the addInfoClasses method.
  * @author Alexandre Denis
  */
 public class JaxbEmotionMLImporter extends EmotionMLImporter
 {
-	private List<Class<? extends Info>> classesToBeBound = new ArrayList<Class<? extends Info>>();
+	private List<Class<? extends Info>> infoClasses = new ArrayList<Class<? extends Info>>();
 
 
 	/**
@@ -45,22 +45,22 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 	 * @param classes
 	 * @return this JaxbEmotionMLImporter for chaining
 	 */
-	public JaxbEmotionMLImporter addClassToBeBounds(Class<? extends Info>... classes)
+	public JaxbEmotionMLImporter addInfoClasses(Class<? extends Info>... classes)
 	{
 		for(Class<? extends Info> c : classes)
-			classesToBeBound.add(c);
+			infoClasses.add(c);
 
 		return this;
 	}
 
 
 	/**
-	 * Returns a live list of all the classes that are defined to be bound.
+	 * Returns a live list of all the info classes for doing the unmarshalling.
 	 * @return
 	 */
-	public List<Class<? extends Info>> getClassesToBeBounds()
+	public List<Class<? extends Info>> getInfoClasses()
 	{
-		return classesToBeBound;
+		return infoClasses;
 	}
 
 
@@ -90,7 +90,7 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 		JAXBContext context = null;
 		try
 		{
-			context = JAXBContext.newInstance(classesToBeBound.toArray(new Class<?>[classesToBeBound.size()]));
+			context = JAXBContext.newInstance(infoClasses.toArray(new Class<?>[infoClasses.size()]));
 			Unmarshaller um = context.createUnmarshaller();
 			return (Info) um.unmarshal(infoContent);
 		}
@@ -98,8 +98,8 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 		{
 			if (e.getLocalizedMessage().indexOf("unexpected element") != -1)
 			{
-				throw new EmotionMLException("Unable to import info using jaxb. Did you bind a class for element \"" + infoContent.getLocalName() +
-												"\" using the addClassesToBeBound method ? The context is:\n" + context);
+				throw new EmotionMLException("Unable to import info using jaxb. Did you bind an info class for element \"" + infoContent.getLocalName() +
+												"\" using the addInfoClasses method ? The context is:\n" + context);
 			}
 			else throw new EmotionMLException("Unable to import info using jaxb: " + e.getLocalizedMessage());
 
