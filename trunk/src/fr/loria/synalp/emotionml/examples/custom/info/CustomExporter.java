@@ -2,6 +2,7 @@ package fr.loria.synalp.emotionml.examples.custom.info;
 
 import org.w3c.dom.*;
 
+import fr.loria.synalp.emotionml.exceptions.EmotionMLException;
 import fr.loria.synalp.emotionml.info.Info;
 import fr.loria.synalp.emotionml.processors.EmotionMLExporter;
 
@@ -14,7 +15,7 @@ class CustomExporter extends EmotionMLExporter
 {
 
 	@Override
-	public Element exportInfo(Info info, Document doc)
+	public Element exportInfo(Info info, Document doc) throws EmotionMLException
 	{
 		Element ret = super.exportInfo(info, doc);
 
