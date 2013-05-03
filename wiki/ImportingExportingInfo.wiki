@@ -171,6 +171,8 @@ class ClassifierInfo extends Info
     @XmlAttribute
     String name;
 
+    ClassifierInfo() {}
+
     ClassifierInfo(String name)
     {   
         this.name = name; 
@@ -185,6 +187,8 @@ class LocalizationInfo extends Info
 {
     @XmlAttribute
     String value;
+
+    LocalizationInfo() {}
 
     LocalizationInfo(String value)
     {   
