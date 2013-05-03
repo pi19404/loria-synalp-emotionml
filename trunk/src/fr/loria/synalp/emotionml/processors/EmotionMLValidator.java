@@ -98,32 +98,32 @@ public class EmotionMLValidator
 		boolean isAssertionValid = true;
 		String schemaErrorMessage = "";
 		String assertionErrorMessage = "";
-		
+
 		identifiers = new HashSet<String>();
 		resolver.setLocalDocument(element.getOwnerDocument());
-		
+
 		// 1- validate schema
 		try
 		{
 			validateSchema(element);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			isSchemaValid = false;
 			schemaErrorMessage = e.getLocalizedMessage();
 		}
-		
+
 		// 2- validate assertions
 		try
 		{
 			validateDocumentPrivate(element);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			isAssertionValid = false;
 			assertionErrorMessage = e.getLocalizedMessage();
 		}
-		
+
 		if (isSchemaValid && isAssertionValid)
 			return element;
 		else throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, isAssertionValid, assertionErrorMessage));
@@ -142,32 +142,32 @@ public class EmotionMLValidator
 		boolean isAssertionValid = true;
 		String schemaErrorMessage = "";
 		String assertionErrorMessage = "";
-		
+
 		identifiers = new HashSet<String>();
 		resolver.setLocalDocument(null);
-		
+
 		// 1- validate schema
 		try
 		{
 			validateSchema(element);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			isSchemaValid = false;
 			schemaErrorMessage = e.getLocalizedMessage();
 		}
-		
+
 		// 2- validate assertions
 		try
 		{
 			validateEmotionPrivate(element);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			isAssertionValid = false;
 			assertionErrorMessage = e.getLocalizedMessage();
 		}
-		
+
 		if (isSchemaValid && isAssertionValid)
 			return element;
 		else throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, isAssertionValid, assertionErrorMessage));
@@ -179,8 +179,8 @@ public class EmotionMLValidator
 	/**
 	 * Validates the document against the EmotionML schema.
 	 * @param doc
-	 * @throws IOException 
-	 * @throws SAXException 
+	 * @throws IOException
+	 * @throws SAXException
 	 */
 	private void validateSchema(Node doc) throws SAXException, IOException
 	{
@@ -809,9 +809,12 @@ public class EmotionMLValidator
 	{
 		NodeList nodes = info.getElementsByTagName("*");
 		for(int i = 0; i < nodes.getLength(); i++)
-			if (nodes.item(i).getNamespaceURI().equals("http://www.w3.org/2009/10/emotionml"))
+		{
+			String namespace = nodes.item(i).getNamespaceURI();
+			if (namespace != null && namespace.equals("http://www.w3.org/2009/10/emotionml"))
 				throw new EmotionMLFormatException("304: The <info> element MUST NOT contain any elements in the EmotionML " +
 													"namespace, \"http://www.w3.org/2009/10/emotionml\" (it contains \"" + nodes.item(i) + "\")");
+		}
 	}
 
 
