@@ -1,5 +1,7 @@
 #summary This page explains how to import/export custom info elements
 
+<wiki:toc max_depth="1" />
+
 = Info elements =
 
 One interesting feature about EmotionML is that it is possible to embed external information inside an emotion, a vocabulary, a vocabulary item or a whole document. This external information is represented as an `<info>` element that can contain any kind of data as long as it is not EmotionML.
