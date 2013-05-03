@@ -51,6 +51,6 @@ public class Info
 	{
 		if (hasId())
 			return id;
-		else return "not defined";
+		else return super.toString();
 	}
 }
