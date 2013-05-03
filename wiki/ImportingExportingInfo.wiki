@@ -29,8 +29,7 @@ The following example shows an emotionml document whose `<info>` element holds n
 </emotionml>
 }}}
 
-In order to export the info elements, it is required to tell explicitly how they are to be serialized. There is no restriction on how to serialize, one can use any kind of tool or method. The only requirements imposed by EmotionML is that the `<info>` elements do not contain EmotionML elements, and that any element in it has a different namespace than the default EmotionML namespace ("http://www.w3.org/2009/10/emotionml"). If XML is not needed to represent the information, one can also serialize it as plain text inside the `<info>` element.
-
+In order to export/import the info elements, it is required to tell explicitly how they are to be serialized/deserialized. There is no restriction on how to do that, one can use any kind of tool or method. The only requirements imposed by EmotionML is that the `<info>` elements do not contain EmotionML elements, and that any element in it has a different namespace than the default EmotionML namespace ("http://www.w3.org/2009/10/emotionml"). If XML is not needed to represent the information, one can also serialize it as plain text inside the `<info>` element. We present here two possible ways to do that import/export, using DOM or using JAXB.
 
 = Using DOM = 
 
