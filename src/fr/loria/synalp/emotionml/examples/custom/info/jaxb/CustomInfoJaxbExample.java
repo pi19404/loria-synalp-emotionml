@@ -32,7 +32,7 @@ public class CustomInfoJaxbExample
 		System.out.println("Serialized:");
 		System.out.println(xml);
 
-		JaxbEmotionMLImporter importer = new JaxbEmotionMLImporter().addClassToBeBounds(ClassifierInfo.class, LocalizationInfo.class);
+		JaxbEmotionMLImporter importer = new JaxbEmotionMLImporter().addInfoClasses(ClassifierInfo.class, LocalizationInfo.class);
 		
 		EmotionMLDocument imported = importer.importDocument(xml);
 		System.out.println("Deserialized:");
