@@ -67,8 +67,9 @@ public class VocabularyResolver
 
 	/**
 	 * Returns the Vocabulary in the local document with given id.
+	 * @throws EmotionMLException 
 	 */
-	private Vocabulary retrieveVocabularyFromLocalDocument(String id)
+	private Vocabulary retrieveVocabularyFromLocalDocument(String id) throws EmotionMLException
 	{
 		// first get the element
 		Element vocabularyElement = null;
@@ -100,8 +101,9 @@ public class VocabularyResolver
 	 * eventually retrieve the document and parse it.
 	 * @param uri
 	 * @return null if not found
+	 * @throws EmotionMLException 
 	 */
-	public Vocabulary retrieveVocabulary(URI uri) throws EmotionMLResolutionException, EmotionMLFormatException
+	public Vocabulary retrieveVocabulary(URI uri) throws EmotionMLException
 	{
 		String id = uri.getFragment();
 

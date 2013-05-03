@@ -192,10 +192,9 @@ public class EmotionMLValidator
 	 * Validates an EmotionML element. It validates its namespace, version, its vocabulary
 	 * references and its children.
 	 * @param root
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateDocumentPrivate(Element root) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateDocumentPrivate(Element root) throws EmotionMLException
 	{
 		validateRootName(root);
 		validateNamespace(root);
@@ -222,10 +221,9 @@ public class EmotionMLValidator
 	/**
 	 * Validates children of emotionml. It validates info, emotions and vocabularies.
 	 * @param root
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateEmotionMLChildren(Element root) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateEmotionMLChildren(Element root) throws EmotionMLException
 	{
 		// we perform validation in two steps, first vocabularies and info, then emotions. The motivation for doing so is that when emotions refer to local vocabularies,
 		// it is easier to first validate all vocabularies then validate all emotions, otherwise we could face a reference to a badly formatted vocabulary while validating
@@ -296,10 +294,9 @@ public class EmotionMLValidator
 	 * Validates the descriptors set of the root element. It both validates the syntax of URI and
 	 * their reference to a valid vocabulary type.
 	 * @param root
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateEmotionMLDescriptorsSet(Element root) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateEmotionMLDescriptorsSet(Element root) throws EmotionMLException
 	{
 		for(VocabularyType type : VocabularyType.values())
 		{
@@ -347,11 +344,10 @@ public class EmotionMLValidator
 	 * Validates the type of vocabulary referred by the given URI and the given expected type.
 	 * @param type
 	 * @param uri
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
 	private void validateEmotionMLVocabularyReference(VocabularyType type, URI uri)
-			throws EmotionMLFormatException, EmotionMLResolutionException
+			throws EmotionMLException
 	{
 		if (!resolveVocabularies)
 			return;
@@ -387,10 +383,9 @@ public class EmotionMLValidator
 	/**
 	 * Validates an emotion element.
 	 * @param emotion
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateEmotionPrivate(Element emotion) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateEmotionPrivate(Element emotion) throws EmotionMLException
 	{
 		validateEmotionDescriptorsSet(emotion);
 		validateEmotionVersion(emotion);
@@ -404,10 +399,9 @@ public class EmotionMLValidator
 	/**
 	 * Validates all children of the given emotion element.
 	 * @param emotion
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateEmotionChildren(Element emotion) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateEmotionChildren(Element emotion) throws EmotionMLException
 	{
 		boolean infoFound = false;
 		boolean descriptorFound = false;
@@ -446,7 +440,7 @@ public class EmotionMLValidator
 
 
 	// 160 - 170
-	private void validateEmotionDescriptorsSet(Element emotion) throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateEmotionDescriptorsSet(Element emotion) throws EmotionMLException
 	{
 		for(VocabularyType type : VocabularyType.values())
 		{
@@ -483,7 +477,7 @@ public class EmotionMLValidator
 	}
 
 
-	private Vocabulary validateEmotionVocabularyReference(URI uri, VocabularyType type) throws EmotionMLFormatException, EmotionMLResolutionException
+	private Vocabulary validateEmotionVocabularyReference(URI uri, VocabularyType type) throws EmotionMLException
 	{
 		if (!resolveVocabularies)
 			return null;
@@ -549,11 +543,9 @@ public class EmotionMLValidator
 	 * set for its type, the actual existence of a vocabulary containing the name, the presence of
 	 * trace or value, and the confidence.
 	 * @param descriptor
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateDescriptor(Element descriptor, Map<VocabularyType, Set<String>> descriptorNames)
-			throws EmotionMLFormatException, EmotionMLResolutionException
+	private void validateDescriptor(Element descriptor, Map<VocabularyType, Set<String>> descriptorNames) throws EmotionMLException
 	{
 		VocabularyType type = VocabularyType.parse(descriptor.getLocalName());
 
@@ -604,11 +596,9 @@ public class EmotionMLValidator
 	 * @param name
 	 * @param descriptorSetURI
 	 * @param type
-	 * @throws EmotionMLFormatException
-	 * @throws EmotionMLResolutionException
+	 * @throws EmotionMLException 
 	 */
-	private void validateDescriptorNameReference(String name, String descriptorSetURI, VocabularyType type) throws EmotionMLFormatException,
-			EmotionMLResolutionException
+	private void validateDescriptorNameReference(String name, String descriptorSetURI, VocabularyType type) throws EmotionMLException
 	{
 		// there might be a misleading message here depending on where the descriptor set URI has been found
 		// since the descriptor set URI may also be found at the emotionml level

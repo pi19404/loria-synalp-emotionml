@@ -32,7 +32,7 @@ class CustomImporter extends EmotionMLImporter
 
 
 	@Override
-	public CustomEmotion importEmotion(Element element)
+	public CustomEmotion importEmotion(Element element) throws EmotionMLException
 	{
 		Emotion emotion = super.importEmotion(element);
 		return new CustomEmotion(emotion.getDescriptor(FsreDimensions.VALENCE.getName()).getValue());
