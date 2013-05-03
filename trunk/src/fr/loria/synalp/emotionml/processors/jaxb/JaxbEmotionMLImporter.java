@@ -56,7 +56,7 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 
 	/**
 	 * Returns a live list of all the info classes for doing the unmarshalling.
-	 * @return
+	 * @return a list of classes
 	 */
 	public List<Class<? extends Info>> getInfoClasses()
 	{
