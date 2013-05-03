@@ -217,7 +217,8 @@ which will produce the same output than previously:
 Importing is slightly more complex than exporting since JAXB requires to know to which classes the XML elements will be unmarshalled. To do the import, an instance of class `JaxbEmotionMLImporter` needs to be created, and the method `addInfoClasses` needs to be called with each of the Info classes we want to unmarshall to: 
 
 {{{
-JaxbEmotionMLImporter importer = new JaxbEmotionMLImporter().addInfoClasses(ClassifierInfo.class, LocalizationInfo.class);
+JaxbEmotionMLImporter importer = new JaxbEmotionMLImporter();
+importer.addInfoClasses(ClassifierInfo.class, LocalizationInfo.class);
 }}}
 
 Once done, the Jaxb importer works the same way than other importers.
