@@ -29,6 +29,8 @@ The following example shows an emotionml document whose `<info>` element holds n
 </emotionml>
 }}}
 
+In order to export the info elements, it is required to tell explicitly how they are to be serialized. There is no restriction on how to serialize, one can use any kind of tool or method. The only requirements imposed by EmotionML is that the `<info>` elements do not contain EmotionML elements, and that any element in it has a different namespace than the default EmotionML namespace ("http://www.w3.org/2009/10/emotionml"). If XML is not needed to represent the information, one can also serialize it as plain text inside the `<info>` element.
+
 
 = Using DOM = 
 
@@ -72,8 +74,6 @@ Emotion emotion = new Emotion(new Category(Big6.HAPPINESS)).setInfo(new Localiza
 
 
 == Exporting ==
-
-In order to export these info instances, it is required to tell explicitly how these are to be serialized. There is no restriction on how to serialize, one can use any kind of tool or method. The only requirements imposed by EmotionML is that the `<info>` elements do not contain EmotionML elements, and that any element in it has a different namespace than the default EmotionML namespace ("http://www.w3.org/2009/10/emotionml"). If XML is not needed to represent the information, one can also serialize it as plain text inside the `<info>` element.
 
 In the following example we show how the `ClassifierInfo` and the `LocalizationInfo` could be serialized using DOM in a way similar to the XML example above. The idea is to subclass the `EmotionMLExporter` and override the `exportInfo` method. This method takes in input an `Info` and a Document instance, the document instance is only needed to create the new DOM elements that will contain our information:
 
