@@ -2,10 +2,12 @@ fr.loria.synalp.emotionml
 fr.loria.synalp.emotionml.descriptors
 fr.loria.synalp.emotionml.examples
 fr.loria.synalp.emotionml.examples.custom.emotion
-fr.loria.synalp.emotionml.examples.custom.info
+fr.loria.synalp.emotionml.examples.custom.info.dom
+fr.loria.synalp.emotionml.examples.custom.info.jaxb
 fr.loria.synalp.emotionml.exceptions
 fr.loria.synalp.emotionml.info
 fr.loria.synalp.emotionml.processors
+fr.loria.synalp.emotionml.processors.jaxb
 fr.loria.synalp.emotionml.processors.json
 fr.loria.synalp.emotionml.tests
 fr.loria.synalp.emotionml.vocabularies

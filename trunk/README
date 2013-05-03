@@ -1,9 +1,49 @@
 ** LORIA/SYNALP EmotionML Implementation
+Alexandre Denis - may 2013
+alexandre.a.denis at gmail.com
 
-Todo:
-	- this README
+The LORIA/SYNALP implementation of EmotionML is a Java standalone library developed in the context of the ITEA Empathic Products project by the LORIA/SYNALP team. 
+It enables to import Java objects from EmotionML XML files and export them to EmotionML as well. It guarantees standard compliance by performing a two steps validation 
+after all export operations and before all import operations: first the EmotionML schema is tested, then all EmotionML assertions are tested. If one or the other fails, 
+an error message is produced and the document cannot be imported or exported. The library contains a corpus of badly formatted EmotionML files that enables to double check 
+if both the schema and the assertions manage to correctly invalidate them. The API is hosted on google code (https://code.google.com/p/loria-synalp-emotionml/) and is 
+released under the MIT License.
+
+
+* ChangeLog
+	v0.1 - first version
+	v0.2 - added marshalling/unmarshalling of <info> elements with JAXB
+
+
+* Todo:
 	- improve exceptions handling (with embedded exceptions)
+	
 			
-Restrictions
+* Restrictions
 	- 1 single text node for emotions
 	- no JSON export for emotions with text
+	
+	
+* License:
+
+The MIT License (MIT)
+
+Copyright (c) <2013> <LORIA/SYNALP team>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
