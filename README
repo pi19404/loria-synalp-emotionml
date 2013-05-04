@@ -9,20 +9,25 @@ an error message is produced and the document cannot be imported or exported. Th
 if both the schema and the assertions manage to correctly invalidate them. The API is hosted on google code (https://code.google.com/p/loria-synalp-emotionml/) and is 
 released under the MIT License.
 
+* Restrictions
+	- 1 single text node for emotions
+	- no JSON export for emotions with text
 
-* ChangeLog
-	v0.1 - first version
-	v0.2 - added marshalling/unmarshalling of <info> elements with JAXB
+
+* Troubleshooting
+	- Access restriction for class IllegalAnnotationsException: in Eclipse, make sure that the JRE System Library is the workspace default
 
 
 * Todo:
 	- improve exceptions handling (with embedded exceptions)
+	- add licenses for packaged jars
+	- remove not used jars
+
 	
-			
-* Restrictions
-	- 1 single text node for emotions
-	- no JSON export for emotions with text
-	
+* ChangeLog
+	v0.1 - first version
+	v0.2 - added marshalling/unmarshalling of <info> elements with JAXB	
+
 	
 * License:
 
