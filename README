@@ -18,15 +18,18 @@ released under the MIT License.
 	- Access restriction for class IllegalAnnotationsException: in Eclipse, make sure that the JRE System Library is the workspace default
 
 
-* Todo:
+* Todo
 	- improve exceptions handling (with embedded exceptions)
 	- add licenses for packaged jars
 	- remove not used jars
 
+* Comments
+	- assertion 607 does not specify that the name attribute of vocabulary <item> elements must be of type xs:NMTOKEN ans as such cannot contain space characters or commas
 	
 * ChangeLog
 	v0.1 - first version
 	v0.2 - added marshalling/unmarshalling of <info> elements with JAXB	
+	v0.2.1 - separated stream writing/reading from export/import
 
 	
 * License:
