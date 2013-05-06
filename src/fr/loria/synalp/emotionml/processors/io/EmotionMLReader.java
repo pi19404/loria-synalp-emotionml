@@ -16,7 +16,7 @@ public interface EmotionMLReader
 	/**
 	 * Returns a DOM Element from the given InputStream.
 	 * @param stream
-	 * @return
+	 * @return a DOM Element
 	 * @throws EmotionMLException
 	 * @throws IOException
 	 */
