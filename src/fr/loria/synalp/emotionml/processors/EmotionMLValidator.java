@@ -1194,6 +1194,8 @@ public class EmotionMLValidator
 			throw new EmotionMLFormatException("608: An <item> MUST NOT have the same name as any other " +
 												"<item> within the same <vocabulary> (it already contains \"" + name + "\")");
 
+		// add restriction xsd:NMTOKEN ?
+		
 		itemNames.add(name);
 
 		NodeList children = item.getChildNodes();
