@@ -5,27 +5,28 @@ import java.math.BigInteger;
 import java.net.*;
 import java.util.*;
 
-import javax.xml.parsers.*;
-
 import org.w3c.dom.*;
-import org.xml.sax.SAXException;
 
 import fr.loria.synalp.emotionml.*;
 import fr.loria.synalp.emotionml.descriptors.*;
 import fr.loria.synalp.emotionml.descriptors.Reference.Role;
 import fr.loria.synalp.emotionml.exceptions.*;
 import fr.loria.synalp.emotionml.info.*;
+import fr.loria.synalp.emotionml.processors.io.*;
 import fr.loria.synalp.emotionml.vocabularies.*;
 
 /**
  * A EmotionMLImporter imports EmotionML elements from the InputStream by first reading the stream
  * as a DOM Element, then by validating the DOM Element with respect to the EmotionML standard and
  * eventually by building EmotionML objects. It also offers different methods to import documents
- * from other sources than stream.
+ * from other sources than stream. In order to read DOM Elements it uses an instance of an
+ * EmotionMLReader, which by default is a XMLEmotionMLReader. It is possible to setup a different
+ * reader.
  * @author Alexandre Denis
  */
 public class EmotionMLImporter extends EmotionMLProcessor
 {
+	private EmotionMLReader reader = new XMLEmotionMLReader();
 
 	/**
 	 * Creates a new EmotionMLImporter with a default EmotionMLValidator.
@@ -44,32 +45,40 @@ public class EmotionMLImporter extends EmotionMLProcessor
 		super(validator);
 	}
 
+	
+
+	/**
+	 * Returns the currently defined EmotionMLReader.
+	 * @return the reader
+	 */
+	public EmotionMLReader getReader()
+	{
+		return reader;
+	}
+
+
+	/**
+	 * Sets the EmotionMLReader that is used to read the input stream.
+	 * @param reader the reader to set
+	 * @return this EmotionLMImporter for chaining
+	 */
+	public EmotionMLImporter setReader(EmotionMLReader reader)
+	{
+		this.reader = reader;
+		return this;
+	}
+
 
 	/**
 	 * Reads the given InputStream as a DOM Element.
 	 * @param stream
 	 * @return a DOM Element
-	 * @throws SAXException
+	 * @throws EmotionMLException
 	 * @throws IOException
 	 */
-	public Element read(InputStream stream) throws EmotionMLException, IOException
+	protected Element read(InputStream stream) throws EmotionMLException, IOException
 	{
-		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-		builderFactory.setNamespaceAware(true);
-		try
-		{
-			DocumentBuilder builder = builderFactory.newDocumentBuilder();
-			return builder.parse(stream).getDocumentElement(); // this can hang when parsing documents containing entities
-		}
-		catch (SAXException e)
-		{
-			throw new EmotionMLException("Unable to read stream: " + e.getLocalizedMessage());
-		}
-		catch (ParserConfigurationException e)
-		{
-			e.printStackTrace();
-			throw new EmotionMLException("Unable to read stream: " + e.getLocalizedMessage());
-		}
+		return reader.read(stream);
 	}
 
 
@@ -174,7 +183,7 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Element is well defined with respect to EmotionML standard.
 	 * @param element
 	 * @return an EmotionMLDocument corresponding to given DOM Element
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	public EmotionMLDocument importDocument(Element element) throws EmotionMLException
 	{
@@ -215,11 +224,11 @@ public class EmotionMLImporter extends EmotionMLProcessor
 
 
 	/**
-	 * Imports the given DOM Element as an Emotion. This method assumes that the given Element is well
-	 * defined with respect to EmotionML standard.
+	 * Imports the given DOM Element as an Emotion. This method assumes that the given Element is
+	 * well defined with respect to EmotionML standard.
 	 * @param element
 	 * @return an Emotion corresponding to given DOM Element
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	public Emotion importEmotion(Element element) throws EmotionMLException
 	{
@@ -272,7 +281,7 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as an Info.
 	 * @param element
 	 * @return an Info corresponding to given DOM Element
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	public Info importInfo(Element element) throws EmotionMLException
 	{
@@ -287,7 +296,7 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as a Vocabulary.
 	 * @param element
 	 * @return a Vocabulary
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	public Vocabulary importVocabulary(Element element) throws EmotionMLException
 	{
@@ -316,7 +325,7 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	 * Imports the given DOM Element as a VocabularyItem
 	 * @param element
 	 * @return a VocabularyItem
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private VocabularyItem importVocabularyItem(Element element) throws EmotionMLException
 	{

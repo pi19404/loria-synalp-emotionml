@@ -6,9 +6,6 @@ import java.io.*;
 import java.util.List;
 
 import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
@@ -16,22 +13,27 @@ import fr.loria.synalp.emotionml.*;
 import fr.loria.synalp.emotionml.descriptors.*;
 import fr.loria.synalp.emotionml.exceptions.*;
 import fr.loria.synalp.emotionml.info.*;
+import fr.loria.synalp.emotionml.processors.io.*;
 import fr.loria.synalp.emotionml.vocabularies.*;
 
 /**
- * A EmotionMLExporter is an EmotionMLProcessor that exports EmotionML objects in an
- * OutputStream by first building DOM elements corresponding to them then validating them.
+ * A EmotionMLExporter is an EmotionMLProcessor that exports EmotionML objects in an OutputStream by
+ * first building DOM elements corresponding to them then validating them. In order to write the DOM
+ * elements it uses an instance of an EmotionMLWriter which by default is a XMLEmotionMLWriter that
+ * writes the elements in XML format. It is possible to set a different writer.
  * @author Alexandre Denis
  */
 public class EmotionMLExporter extends EmotionMLProcessor
 {
+	private EmotionMLWriter writer = new XMLEmotionMLWriter();
+
 
 	/**
 	 * Creates a new EmotionMLExporter based on a default EmotionMLValidator.
 	 */
 	public EmotionMLExporter()
 	{
-		super();
+
 	}
 
 
@@ -46,37 +48,42 @@ public class EmotionMLExporter extends EmotionMLProcessor
 
 
 	/**
-	 * Writes the given Element to the given OutputStream.
+	 * Sets the EmotionMLWriter that is used to write the DOM elements.
+	 * @param writer
+	 * @return this EmotionMLExporter for chaining
+	 */
+	public EmotionMLExporter setWriter(EmotionMLWriter writer)
+	{
+		this.writer = writer;
+		return this;
+	}
+	
+	
+	/**
+	 * Returns the currently used EmotionMLWriter.
+	 */
+	public EmotionMLWriter getWriter()
+	{
+		return writer;
+	}
+
+
+	/**
+	 * Writes the given Element to the given OutputStream using the defined writer.
 	 * @param element
 	 * @param stream
 	 */
-	public void write(Element element, OutputStream stream) throws EmotionMLException
+	protected void write(Element element, OutputStream stream) throws EmotionMLException
 	{
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer;
-		try
-		{
-			transformer = transformerFactory.newTransformer();
-			transformer.setOutputProperty("indent", "yes");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-			transformer.transform(new DOMSource(element), new StreamResult(stream));
-		}
-		catch (TransformerConfigurationException e)
-		{
-			throw new EmotionMLException("Unable to write element: "+e.getLocalizedMessage());
-		}
-		catch (TransformerException e)
-		{
-			throw new EmotionMLException("Unable to write element: "+e.getLocalizedMessage());
-		}
+		writer.write(element, stream);
 	}
 
 
 	/**
 	 * Exports the given EmotionMLDocument as a DOM Node.
 	 * @param document
-	 * @throws EmotionMLException 
-	 * @throws EmotionMLValidationException 
+	 * @throws EmotionMLException
+	 * @throws EmotionMLValidationException
 	 */
 	public void export(EmotionMLDocument document, OutputStream stream) throws EmotionMLValidationException, EmotionMLException
 	{
@@ -87,7 +94,7 @@ public class EmotionMLExporter extends EmotionMLProcessor
 	/**
 	 * Exports the given Emotion as a DOM Node.
 	 * @param emotion
-	 * @throws EmotionMLValidationException 
+	 * @throws EmotionMLValidationException
 	 */
 	public void export(Emotion emotion, OutputStream stream) throws EmotionMLValidationException, EmotionMLException
 	{
