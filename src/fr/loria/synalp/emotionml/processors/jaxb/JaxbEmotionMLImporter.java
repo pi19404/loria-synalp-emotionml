@@ -41,6 +41,18 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 
 
 	/**
+	 * Adds the given class for doing the unmarshalling.
+	 * @param classes
+	 * @return this JaxbEmotionMLImporter for chaining
+	 */
+	public JaxbEmotionMLImporter addInfoClass(Class<? extends Info> c)
+	{
+		infoClasses.add(c);
+		return this;
+	}
+
+
+	/**
 	 * Adds the given classes for doing the unmarshalling.
 	 * @param classes
 	 * @return this JaxbEmotionMLImporter for chaining
