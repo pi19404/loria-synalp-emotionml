@@ -68,7 +68,7 @@ class LocalizationInfo extends Info
 
 One can then build an emotion or document and call the `setInfo` method:
 {{{
-Emotion emotion = new Emotion(new Category(Big6.HAPPINESS)).setInfo(new LocalizationInfo("bavarian"));
+Emotion emotion = new Emotion(Big6.HAPPINESS).setInfo(new LocalizationInfo("bavarian"));
 }}}
 
 
@@ -199,7 +199,7 @@ class LocalizationInfo extends Info
 
 Once the classes have be defined like this, exporting the emotion is quite simple and relies on a `JaxbEmotionMLExporter` instance:
 {{{
-Emotion emotion = new Emotion(new Category(Big6.HAPPINESS)).setInfo(new LocalizationInfo("bavarian"));
+Emotion emotion = new Emotion(Big6.HAPPINESS).setInfo(new LocalizationInfo("bavarian"));
 
 new JaxbEmotionMLExporter().export(emotion, System.out);
 }}}
