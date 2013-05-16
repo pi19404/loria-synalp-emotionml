@@ -115,9 +115,9 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 
 
 	/**
-	 * Returns a Collection view of all the descriptors of given type defined in this Emotion.
+	 * Returns a List view of all the descriptors of given type defined in this Emotion.
 	 */
-	public Collection<? extends EmotionDescriptor> getDescriptors(VocabularyType type)
+	public List<? extends EmotionDescriptor> getDescriptors(VocabularyType type)
 	{
 		switch (type)
 		{
@@ -138,10 +138,10 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 
 
 	/**
-	 * Returns a Collection view of the categories defined in this Emotion.
-	 * @return a Collection view of categories
+	 * Returns a List view of the categories defined in this Emotion.
+	 * @return a List view of categories
 	 */
-	public Collection<Category> getCategories()
+	public List<Category> getCategories()
 	{
 		List<Category> ret = new ArrayList<Category>();
 		for(EmotionDescriptor descriptor : descriptors)
@@ -152,10 +152,10 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 
 
 	/**
-	 * Returns a Collection view of the appraisals defined in this Emotion.
-	 * @return a Collection view of appraisals
+	 * Returns a List view of the appraisals defined in this Emotion.
+	 * @return a List view of appraisals
 	 */
-	public Collection<Appraisal> getAppraisals()
+	public List<Appraisal> getAppraisals()
 	{
 		List<Appraisal> ret = new ArrayList<Appraisal>();
 		for(EmotionDescriptor descriptor : descriptors)
@@ -166,10 +166,10 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 
 
 	/**
-	 * Returns a Collection view of the dimensions defined in this Emotion.
-	 * @return a Collection view of dimensions
+	 * Returns a List view of the dimensions defined in this Emotion.
+	 * @return a List view of dimensions
 	 */
-	public Collection<Dimension> getDimensions()
+	public List<Dimension> getDimensions()
 	{
 		List<Dimension> ret = new ArrayList<Dimension>();
 		for(EmotionDescriptor descriptor : descriptors)
@@ -180,10 +180,10 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 
 
 	/**
-	 * Returns a Collection view of the action tendencies defined in this Emotion.
-	 * @return a Collection view of action tendencies
+	 * Returns a List view of the action tendencies defined in this Emotion.
+	 * @return a List view of action tendencies
 	 */
-	public Collection<ActionTendency> getActionTendencies()
+	public List<ActionTendency> getActionTendencies()
 	{
 		List<ActionTendency> ret = new ArrayList<ActionTendency>();
 		for(EmotionDescriptor descriptor : descriptors)
