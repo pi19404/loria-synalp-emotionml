@@ -73,7 +73,12 @@ public class EmotionMLValidator
 		readMediaTypes();
 		this.resolveVocabularies = resolveVocabularies;
 		this.resolver = new VocabularyResolver();
+		
+		// investigate: IllegalArgumentException when creating a schema factory on android
+		// we should find an alternative way of creating the schema, 
+		// check https://groups.google.com/forum/?fromgroups#!topic/android-developers/F-L6kUPn5PQ
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		
 		URL schemaURL = getClass().getClassLoader().getResource(EMOTIONML_SCHEMA);
 		try
 		{
