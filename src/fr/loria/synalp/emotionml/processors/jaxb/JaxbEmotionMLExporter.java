@@ -1,5 +1,7 @@
 package fr.loria.synalp.emotionml.processors.jaxb;
 
+import java.util.*;
+
 import javax.xml.bind.*;
 import javax.xml.transform.dom.DOMResult;
 
@@ -13,18 +15,24 @@ import fr.loria.synalp.emotionml.info.Info;
 import fr.loria.synalp.emotionml.processors.*;
 
 /**
- * A JaxbEmotionMLExporter is an EmotionMLExporter that exports Info objects using JAXB.
+ * A JaxbEmotionMLExporter is an EmotionMLExporter that exports Info objects using JAXB. It
+ * maintains a JAXBContext for the export of classes: when exporting a different type of Info class
+ * this type is kept in memory and the JAXBContext is regenerated. This avoids forcing to the user
+ * to specify which are the Info classes that will be used, like the JaxbEmotionMLImporter.
  * @author Alexandre Denis
  */
 public class JaxbEmotionMLExporter extends EmotionMLExporter
 {
+	private JAXBContext context;
+	private Set<Class<? extends Info>> knownClasses = new HashSet<Class<? extends Info>>();
+
 
 	/**
 	 * Creates a new JaxbEmotionMLExporter.
 	 */
 	public JaxbEmotionMLExporter()
 	{
-		super();
+		
 	}
 
 
@@ -55,7 +63,12 @@ public class JaxbEmotionMLExporter extends EmotionMLExporter
 		{
 			try
 			{
-				JAXBContext context = JAXBContext.newInstance(info.getClass());
+				if (!knownClasses.contains(info.getClass()))
+				{
+					knownClasses.add(info.getClass());
+					createJAXBContext();
+				}
+
 				Marshaller m = context.createMarshaller();
 				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
@@ -83,4 +96,12 @@ public class JaxbEmotionMLExporter extends EmotionMLExporter
 		return ret;
 	}
 
+
+	/**
+	 * Creates or recreates the JAXBContext using the known classes.
+	 */
+	private void createJAXBContext() throws JAXBException
+	{
+		context = JAXBContext.newInstance(knownClasses.toArray(new Class<?>[knownClasses.size()]));
+	}
 }
