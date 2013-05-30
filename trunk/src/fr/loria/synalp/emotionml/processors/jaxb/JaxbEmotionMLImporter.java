@@ -19,7 +19,8 @@ import fr.loria.synalp.emotionml.processors.*;
  */
 public class JaxbEmotionMLImporter extends EmotionMLImporter
 {
-	private List<Class<? extends Info>> infoClasses = new ArrayList<Class<? extends Info>>();
+	private JAXBContext context;
+	private Set<Class<? extends Info>> knownClasses = new HashSet<Class<? extends Info>>();
 
 
 	/**
@@ -41,38 +42,58 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 
 
 	/**
-	 * Adds the given class for doing the unmarshalling.
+	 * Adds the given class for doing the unmarshalling. This method adds the given info classe and
+	 * recreates the JAXBContext.
 	 * @param classes
 	 * @return this JaxbEmotionMLImporter for chaining
 	 */
 	public JaxbEmotionMLImporter addInfoClass(Class<? extends Info> c)
 	{
-		infoClasses.add(c);
+		knownClasses.add(c);
+		try
+		{
+			createJAXBContext();
+		}
+		catch (JAXBException e)
+		{
+			e.printStackTrace();
+		}
 		return this;
 	}
 
 
 	/**
-	 * Adds the given classes for doing the unmarshalling.
+	 * Adds the given classes for doing the unmarshalling. This method adds the given info classes
+	 * and recreates the JAXBContext.
 	 * @param classes
 	 * @return this JaxbEmotionMLImporter for chaining
 	 */
 	public JaxbEmotionMLImporter addInfoClasses(Class<? extends Info>... classes)
 	{
 		for(Class<? extends Info> c : classes)
-			infoClasses.add(c);
+			knownClasses.add(c);
+
+		try
+		{
+			createJAXBContext();
+		}
+		catch (JAXBException e)
+		{
+			e.printStackTrace();
+		}
 
 		return this;
 	}
 
 
 	/**
-	 * Returns a live list of all the info classes for doing the unmarshalling.
+	 * Returns a live set of all the info classes for doing the unmarshalling. Note that if you
+	 * modify the set of info classes, you will have to explicitely call createJAXBContext.
 	 * @return a list of classes
 	 */
-	public List<Class<? extends Info>> getInfoClasses()
+	public Set<Class<? extends Info>> getInfoClasses()
 	{
-		return infoClasses;
+		return knownClasses;
 	}
 
 
@@ -99,10 +120,10 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 	 */
 	private Info createInfo(String id, Element infoContent) throws EmotionMLException
 	{
-		JAXBContext context = null;
 		try
 		{
-			context = JAXBContext.newInstance(infoClasses.toArray(new Class<?>[infoClasses.size()]));
+			if (context == null)
+				createJAXBContext();
 			Unmarshaller um = context.createUnmarshaller();
 			return (Info) um.unmarshal(infoContent);
 		}
@@ -120,5 +141,14 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 		{
 			throw new EmotionMLException("Unable to import info using jaxb: " + e.getLocalizedMessage());
 		}
+	}
+
+
+	/**
+	 * Creates or recreates the JAXBContext using the known classes.
+	 */
+	public void createJAXBContext() throws JAXBException
+	{
+		context = JAXBContext.newInstance(knownClasses.toArray(new Class<?>[knownClasses.size()]));
 	}
 }
