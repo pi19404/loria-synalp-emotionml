@@ -902,9 +902,28 @@ public class EmotionMLValidator
 		validateNonNegativeInteger(emotion, "start", 420);
 		validateNonNegativeInteger(emotion, "end", 421);
 		validateNonNegativeInteger(emotion, "duration", 422);
+		validateEndGreaterThanStart(emotion);
 		validateEmotionTimeRefURI(emotion);
 		validateEmotionTimeRefAnchorPoint(emotion);
 		validateEmotionOffsetToStart(emotion);
+	}
+
+
+	/**
+	 * Checks if the end value is greater or equal than the start value.
+	 * As of this writing, it has no implementation assertion associated.
+	 * @param emotion
+	 */
+	private void validateEndGreaterThanStart(Element emotion) throws EmotionMLFormatException
+	{
+		String startStr = emotion.getAttribute("start");
+		String endStr = emotion.getAttribute("end");
+		if (!startStr.equals("") && !endStr.equals(""))
+		{
+			if (new BigInteger(startStr).compareTo(new BigInteger(endStr)) == 1)
+				throw new EmotionMLFormatException("-1: The value of the \"end\" attribute of <emotion>, if present," +
+						" MUST be greater than or equal to the \"start\" attribute (start="+startStr+" end="+endStr+")");
+		}
 	}
 
 
