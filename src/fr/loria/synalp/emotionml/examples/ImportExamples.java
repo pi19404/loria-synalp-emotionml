@@ -1,8 +1,9 @@
 package fr.loria.synalp.emotionml.examples;
 
-import java.io.File;
+import java.io.*;
 
-import fr.loria.synalp.emotionml.processors.EmotionMLImporter;
+import fr.loria.synalp.emotionml.processors.*;
+import fr.loria.synalp.emotionml.processors.io.XMLEmotionMLReader;
 
 /**
  * This example shows how to import documents from Files.
@@ -16,12 +17,12 @@ public class ImportExamples
 	public static void main(String[] args)
 	{
 		importer = new EmotionMLImporter();
-		importInternal(new File("tests"));
-		importExternal(new File("tests/external"));
+		importInternalDocuments(new File("tests"));
+		validateExternalDocuments(new File("tests/external"));
 	}
 	
 	
-	private static void importInternal(File folder)
+	private static void importInternalDocuments(File folder)
 	{
 		for(File file : folder.listFiles())
 		{
@@ -42,8 +43,10 @@ public class ImportExamples
 	}
 	
 	
-	private static void importExternal(File folder)
+	private static void validateExternalDocuments(File folder)
 	{
+		XMLEmotionMLReader reader = new XMLEmotionMLReader();
+		EmotionMLValidator validator = new EmotionMLValidator();
 		for(File file : folder.listFiles())
 		{
 			if (file.isDirectory())
@@ -52,6 +55,7 @@ public class ImportExamples
 			try
 			{
 				System.out.println("Importing "+file);
+				validator.validateExternalDocument(reader.read(new FileInputStream(file)));
 				//importer.importExternalDocument(file); // TODO
 			}
 			catch(Exception e)

@@ -73,12 +73,12 @@ public class EmotionMLValidator
 		readMediaTypes();
 		this.resolveVocabularies = resolveVocabularies;
 		this.resolver = new VocabularyResolver();
-		
+
 		// investigate: IllegalArgumentException when creating a schema factory on android
 		// we should find an alternative way of creating the schema, 
 		// check https://groups.google.com/forum/?fromgroups#!topic/android-developers/F-L6kUPn5PQ
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		
+
 		URL schemaURL = getClass().getClassLoader().getResource(EMOTIONML_SCHEMA);
 		try
 		{
@@ -132,6 +132,28 @@ public class EmotionMLValidator
 		if (isSchemaValid && isAssertionValid)
 			return element;
 		else throw new EmotionMLValidationException(new ValidationResult(element, isSchemaValid, schemaErrorMessage, isAssertionValid, assertionErrorMessage));
+	}
+
+
+	/**
+	 * Validates a document which may contain &lt;emotion&gt; elements. It finds all the
+	 * &lt;emotion&gt; elements and validates each one.
+	 * @param element
+	 * @return the input element if valid
+	 * @throws EmotionMLValidationException if one of the embedded emotions does not validate
+	 */
+	public Element validateExternalDocument(Element element) throws EmotionMLValidationException
+	{
+		if (element.getNodeName().equals("emotion"))
+			return validateEmotion(element);
+		else
+		{
+			NodeList children = element.getChildNodes();
+			for(int i = 0; i < children.getLength(); i++)
+				if (children.item(i) instanceof Element)
+					validateExternalDocument((Element) children.item((i)));
+			return element;
+		}
 	}
 
 
@@ -197,7 +219,7 @@ public class EmotionMLValidator
 	 * Validates an EmotionML element. It validates its namespace, version, its vocabulary
 	 * references and its children.
 	 * @param root
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateDocumentPrivate(Element root) throws EmotionMLException
 	{
@@ -226,7 +248,7 @@ public class EmotionMLValidator
 	/**
 	 * Validates children of emotionml. It validates info, emotions and vocabularies.
 	 * @param root
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateEmotionMLChildren(Element root) throws EmotionMLException
 	{
@@ -299,7 +321,7 @@ public class EmotionMLValidator
 	 * Validates the descriptors set of the root element. It both validates the syntax of URI and
 	 * their reference to a valid vocabulary type.
 	 * @param root
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateEmotionMLDescriptorsSet(Element root) throws EmotionMLException
 	{
@@ -349,7 +371,7 @@ public class EmotionMLValidator
 	 * Validates the type of vocabulary referred by the given URI and the given expected type.
 	 * @param type
 	 * @param uri
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateEmotionMLVocabularyReference(VocabularyType type, URI uri)
 			throws EmotionMLException
@@ -388,7 +410,7 @@ public class EmotionMLValidator
 	/**
 	 * Validates an emotion element.
 	 * @param emotion
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateEmotionPrivate(Element emotion) throws EmotionMLException
 	{
@@ -404,7 +426,7 @@ public class EmotionMLValidator
 	/**
 	 * Validates all children of the given emotion element.
 	 * @param emotion
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateEmotionChildren(Element emotion) throws EmotionMLException
 	{
@@ -548,7 +570,7 @@ public class EmotionMLValidator
 	 * set for its type, the actual existence of a vocabulary containing the name, the presence of
 	 * trace or value, and the confidence.
 	 * @param descriptor
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateDescriptor(Element descriptor, Map<VocabularyType, Set<String>> descriptorNames) throws EmotionMLException
 	{
@@ -601,7 +623,7 @@ public class EmotionMLValidator
 	 * @param name
 	 * @param descriptorSetURI
 	 * @param type
-	 * @throws EmotionMLException 
+	 * @throws EmotionMLException
 	 */
 	private void validateDescriptorNameReference(String name, String descriptorSetURI, VocabularyType type) throws EmotionMLException
 	{
@@ -623,7 +645,8 @@ public class EmotionMLValidator
 				errorType = 242;
 			throw new EmotionMLFormatException(errorType + ": The value of the \"name\" attribute of the <" + type + "> element MUST" +
 												" be contained in the declared category vocabulary " +
-												"(the name is \"" + name + "\" but the declared names for \"" + uri + "\" are " + vocabulary.getItemNames() + ")");
+												"(the name is \"" + name + "\" but the declared names for \"" + uri + "\" are " + vocabulary.getItemNames() +
+												")");
 		}
 	}
 
@@ -910,8 +933,8 @@ public class EmotionMLValidator
 
 
 	/**
-	 * Checks if the end value is greater or equal than the start value.
-	 * As of this writing, it has no implementation assertion associated.
+	 * Checks if the end value is greater or equal than the start value. As of this writing, it has
+	 * no implementation assertion associated.
 	 * @param emotion
 	 */
 	private void validateEndGreaterThanStart(Element emotion) throws EmotionMLFormatException
@@ -922,7 +945,7 @@ public class EmotionMLValidator
 		{
 			if (new BigInteger(startStr).compareTo(new BigInteger(endStr)) == 1)
 				throw new EmotionMLFormatException("-1: The value of the \"end\" attribute of <emotion>, if present," +
-						" MUST be greater than or equal to the \"start\" attribute (start="+startStr+" end="+endStr+")");
+													" MUST be greater than or equal to the \"start\" attribute (start=" + startStr + " end=" + endStr + ")");
 		}
 	}
 
@@ -1166,7 +1189,8 @@ public class EmotionMLValidator
 
 		if (identifiers.contains(id))
 			throw new EmotionMLFormatException("605: The value of the \"id\" attribute of the <vocabulary> " +
-												"element MUST be of type xsd:ID (it is \"" + id + "\" and there already exists an element with that identifier)");
+												"element MUST be of type xsd:ID (it is \"" + id +
+												"\" and there already exists an element with that identifier)");
 		else identifiers.add(id);
 	}
 
@@ -1219,7 +1243,7 @@ public class EmotionMLValidator
 												"<item> within the same <vocabulary> (it already contains \"" + name + "\")");
 
 		// add restriction xsd:NMTOKEN ?
-		
+
 		itemNames.add(name);
 
 		NodeList children = item.getChildNodes();
