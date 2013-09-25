@@ -56,7 +56,7 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 		super(emotion);
 		this.id = emotion.getId();
 		this.version = emotion.getVersion();
-		this.emotionText = new EmotionText(emotion.getText().getContent());
+		this.emotionText = emotion.hasText() ? new EmotionText(emotion.getText()) : null;
 		this.timestamp = new Timestamp(emotion.getTimestamp());
 
 		for(Reference reference : emotion.getReferences())

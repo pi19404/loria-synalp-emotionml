@@ -32,7 +32,7 @@ released under the MIT License.
 	v0.2.1 - separated stream writing/reading from export/import
 	v0.2.2 - improved JAXB to create the context only once
 	v0.2.3 - added a (end>=start) assertion test and validation of embedded emotions.
-	
+	v0.2.4 - added copy constructors
 	
 * License:
 
