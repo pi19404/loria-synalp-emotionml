@@ -1,7 +1,7 @@
 package fr.loria.synalp.emotionml.descriptors;
 
 import java.math.BigInteger;
-import java.net.URI;
+import java.net.*;
 
 /**
  * A Timestamp gathers all time related information about an Emotion. See <a
@@ -58,6 +58,21 @@ public class Timestamp
 	public Timestamp()
 	{
 
+	}
+
+
+	/**
+	 * Deep copies the given Timestamp.
+	 * @param timestamp
+	 */
+	public Timestamp(Timestamp timestamp)
+	{
+		this.start = timestamp.getStart();
+		this.end = timestamp.getEnd();
+		this.duration = timestamp.getDuration();
+		this.timeRefUri = timestamp.getTimeRefURI(); // since immutable
+		this.offsetToStart = timestamp.getOffsetToStart();
+		this.timeRefAnchorPoint = timestamp.getTimeRefAnchorPoint();
 	}
 
 
@@ -337,8 +352,8 @@ public class Timestamp
 			if (hasTimeRefURI())
 				ret.append("ref=").append(timeRefUri);
 		}
-		
-		return ret.toString().trim()+"]";
+
+		return ret.toString().trim() + "]";
 	}
 
 

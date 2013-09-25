@@ -19,6 +19,15 @@ public class EmotionText implements EmotionNode
 		this.content = content;
 	}
 
+	
+	/**
+	 * Deep copies the given EmotionText.
+	 */
+	public EmotionText(EmotionText text)
+	{
+		this.content = text.getContent();
+	}
+	
 
 	/**
 	 * Returns the text content of this EmotionText.

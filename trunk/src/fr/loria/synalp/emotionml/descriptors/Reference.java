@@ -46,6 +46,10 @@ public class Reference
 	private String mediaType;
 
 
+	/**
+	 * Creates a new Reference with given URI.
+	 * @param uri
+	 */
 	public Reference(URI uri)
 	{
 		this.uri = uri;
@@ -53,6 +57,11 @@ public class Reference
 	}
 
 
+	/**
+	 * Creates a new Reference with given URI and Role.
+	 * @param uri
+	 * @param role
+	 */
 	public Reference(URI uri, Role role)
 	{
 		this.uri = uri;
@@ -60,11 +69,29 @@ public class Reference
 	}
 
 
+	/**
+	 * Creates a new Reference with given URI, media type and Role.
+	 * @param uri
+	 * @param mediaType
+	 * @param role
+	 */
 	public Reference(URI uri, String mediaType, Role role)
 	{
 		this.uri = uri;
 		this.role = role;
 		this.mediaType = mediaType;
+	}
+
+
+	/**
+	 * Deep copies the given Reference.
+	 * @param reference
+	 */
+	public Reference(Reference reference)
+	{
+		this.uri = reference.getURI(); // since immutable
+		this.role = reference.getRole();
+		this.mediaType = reference.getMediaType();
 	}
 
 
@@ -131,7 +158,7 @@ public class Reference
 		return mediaType != null;
 	}
 
-	
+
 	@Override
 	public String toString()
 	{

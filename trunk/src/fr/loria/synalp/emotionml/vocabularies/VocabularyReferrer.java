@@ -6,15 +6,34 @@ import java.util.*;
 import fr.loria.synalp.emotionml.info.InfoCarrier;
 
 /**
- * A VocabularyReferrer is an InfoCarrier that carries information about vocabulary URIs,
- * that is category set, dimension set, appraisal set and action tendency set. It is used as a super
- * class for both Emotion and EmotionMLDocument.
+ * A VocabularyReferrer is an InfoCarrier that carries information about vocabulary URIs, that is
+ * category set, dimension set, appraisal set and action tendency set. It is used as a super class
+ * for both Emotion and EmotionMLDocument.
  * @author Alexandre Denis
  */
 public class VocabularyReferrer extends InfoCarrier
 {
 	// vocabulary URIs: category-set, dimension-set, action-tendency-set, and appraisal-set
 	private Map<VocabularyType, URI> descriptorsSetURIs = new HashMap<VocabularyType, URI>();
+
+
+	/**
+	 * Creates a new empty VocabularyReferrer.
+	 */
+	public VocabularyReferrer()
+	{
+
+	}
+
+
+	/**
+	 * Deep copies the given VocabularyReferrer.
+	 */
+	public VocabularyReferrer(VocabularyReferrer referrer)
+	{
+		super(referrer);
+		descriptorsSetURIs.putAll(referrer.descriptorsSetURIs);
+	}
 
 
 	/**
@@ -90,7 +109,6 @@ public class VocabularyReferrer extends InfoCarrier
 	}
 
 
-
 	/**
 	 * Sets the URI corresponding to the appraisal set reference. If there is already an URI
 	 * associated with the appraisal set, replace it by the given one.
@@ -102,7 +120,7 @@ public class VocabularyReferrer extends InfoCarrier
 		descriptorsSetURIs.put(VocabularyType.APPRAISAL, uri);
 		return this;
 	}
-	
+
 
 	/**
 	 * Sets the URI corresponding to the category set reference. If there is already an URI
@@ -115,7 +133,6 @@ public class VocabularyReferrer extends InfoCarrier
 		descriptorsSetURIs.put(VocabularyType.CATEGORY, uri);
 		return this;
 	}
-
 
 
 	/**
@@ -131,7 +148,6 @@ public class VocabularyReferrer extends InfoCarrier
 	}
 
 
-
 	/**
 	 * Sets the URI corresponding to the dimension set reference. If there is already an URI
 	 * associated with the dimension set, replace it by the given one.
@@ -143,9 +159,8 @@ public class VocabularyReferrer extends InfoCarrier
 		descriptorsSetURIs.put(VocabularyType.DIMENSION, uri);
 		return this;
 	}
-	
-	
-	
+
+
 	/**
 	 * Sets the URI corresponding to the action tendency set reference. If there is already an URI
 	 * associated with the action tendency set, replace it by the given one.
@@ -158,12 +173,11 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setActionTendencySetURI(new URI(uri));
 		}
-		catch(URISyntaxException e)
+		catch (URISyntaxException e)
 		{
 			return null;
 		}
 	}
-
 
 
 	/**
@@ -178,12 +192,12 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setAppraisalSetURI(new URI(uri));
 		}
-		catch(URISyntaxException e)
+		catch (URISyntaxException e)
 		{
 			return null;
 		}
 	}
-	
+
 
 	/**
 	 * Sets the URI corresponding to the category set reference. If there is already an URI
@@ -197,12 +211,11 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setCategorySetURI(new URI(uri));
 		}
-		catch(URISyntaxException e)
+		catch (URISyntaxException e)
 		{
 			return null;
 		}
 	}
-
 
 
 	/**
@@ -217,12 +230,11 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setDescriptorSetURI(type, new URI(uri));
 		}
-		catch(URISyntaxException e)
+		catch (URISyntaxException e)
 		{
 			return null;
 		}
 	}
-
 
 
 	/**
@@ -237,7 +249,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setDimensionSetURI(new URI(uri));
 		}
-		catch(URISyntaxException e)
+		catch (URISyntaxException e)
 		{
 			return null;
 		}

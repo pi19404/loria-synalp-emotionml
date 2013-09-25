@@ -48,6 +48,42 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 	}
 
 
+	/**
+	 * Deep copies the given Emotion.
+	 */
+	public Emotion(Emotion emotion)
+	{
+		super(emotion);
+		this.id = emotion.getId();
+		this.version = emotion.getVersion();
+		this.emotionText = new EmotionText(emotion.getText().getContent());
+		this.timestamp = new Timestamp(emotion.getTimestamp());
+
+		for(Reference reference : emotion.getReferences())
+			this.references.add(new Reference(reference));
+
+		for(EmotionDescriptor descriptor : emotion.getDescriptors())
+			switch (descriptor.getType())
+			{
+				case ACTION_TENDENCY:
+					descriptors.add(new ActionTendency((ActionTendency) descriptor));
+					break;
+				case APPRAISAL:
+					descriptors.add(new Appraisal((Appraisal) descriptor));
+					break;
+				case CATEGORY:
+					descriptors.add(new Category((Category) descriptor));
+					break;
+				case DIMENSION:
+					descriptors.add(new Dimension((Dimension) descriptor));
+					break;
+			}
+
+		for(ExpressedThrough expressed : emotion.getExpressedThrough())
+			expressedThrough.add(new ExpressedThrough(expressed));
+	}
+
+
 ////// Emotion descriptors
 
 	/**
@@ -67,9 +103,10 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 			setDescriptorSetURI(descriptor.getType(), descriptor.getURI());
 	}
 
-	
+
 	/**
-	 * Adds all the given EmotionDescriptors to this Emotion. See {@link #add(EmotionDescriptor) add}.
+	 * Adds all the given EmotionDescriptors to this Emotion. See {@link #add(EmotionDescriptor)
+	 * add}.
 	 * @param descriptors a collection of descriptors
 	 */
 	public void addAll(Collection<EmotionDescriptor> descriptors)
@@ -77,6 +114,7 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 		for(EmotionDescriptor descriptor : descriptors)
 			add(descriptor);
 	}
+
 
 	/**
 	 * Removes the given EmotionDescriptor from this Emotion.
