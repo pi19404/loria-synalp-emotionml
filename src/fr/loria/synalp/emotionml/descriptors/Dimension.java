@@ -37,8 +37,7 @@ public class Dimension extends EmotionDescriptor
 	 */
 	public Dimension(Dimension dimension)
 	{
-		super(VocabularyType.DIMENSION, dimension.getName());
-		setURI(dimension.getURI());
+		super(dimension);
 	}
 
 
@@ -49,8 +48,8 @@ public class Dimension extends EmotionDescriptor
 	 */
 	public Dimension(Dimension dimension, Float value)
 	{
-		super(VocabularyType.DIMENSION, dimension.getName(), value);
-		setURI(dimension.getURI());
+		super(dimension);
+		setValue(value);
 	}
 
 
@@ -61,7 +60,7 @@ public class Dimension extends EmotionDescriptor
 	 */
 	public Dimension(Dimension dimension, Trace trace)
 	{
-		super(VocabularyType.DIMENSION, dimension.getName(), trace);
-		setURI(dimension.getURI());
+		super(dimension);
+		setTrace(trace);
 	}
 }
