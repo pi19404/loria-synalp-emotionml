@@ -67,6 +67,16 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 			setDescriptorSetURI(descriptor.getType(), descriptor.getURI());
 	}
 
+	
+	/**
+	 * Adds all the given EmotionDescriptors to this Emotion. See {@link #add(EmotionDescriptor) add}.
+	 * @param descriptors a collection of descriptors
+	 */
+	public void addAll(Collection<EmotionDescriptor> descriptors)
+	{
+		for(EmotionDescriptor descriptor : descriptors)
+			add(descriptor);
+	}
 
 	/**
 	 * Removes the given EmotionDescriptor from this Emotion.
