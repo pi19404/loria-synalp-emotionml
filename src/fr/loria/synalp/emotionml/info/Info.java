@@ -19,6 +19,15 @@ public class Info
 
 
 	/**
+	 * Deep copies the given Info.
+	 */
+	public Info(Info info)
+	{
+		this.id = info.getId();
+	}
+
+
+	/**
 	 * @param id
 	 */
 	public Info(String id)
@@ -33,6 +42,15 @@ public class Info
 	public String getId()
 	{
 		return id;
+	}
+
+
+	/**
+	 * Returns a copy of this Info.
+	 */
+	public Info copy()
+	{
+		return new Info(this);
 	}
 
 

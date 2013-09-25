@@ -10,6 +10,25 @@ public class InfoCarrier
 
 
 	/**
+	 * Creates an empty InfoCarrier.
+	 */
+	public InfoCarrier()
+	{
+
+	}
+
+
+	/**
+	 * Deep copies the given InfoCarrier. It uses the {@link Info#copy() copy} method of the Info
+	 * class.
+	 */
+	public InfoCarrier(InfoCarrier carrier)
+	{
+		this.info = carrier.hasInfo() ? carrier.getInfo().copy() : null;
+	}
+
+
+	/**
 	 * Tests if this InfoCarrier has an Info.
 	 * @return true if this InfoCarrier has an Info
 	 */

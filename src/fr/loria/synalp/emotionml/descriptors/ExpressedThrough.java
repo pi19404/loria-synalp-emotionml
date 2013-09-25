@@ -4,7 +4,7 @@ package fr.loria.synalp.emotionml.descriptors;
  * ExpressedThrough describes the modality through which an emotion is produced. It is either
  * represented with a Type, that provides a convenient enumeration of the most common modalities or
  * as a Value which is an open value. See <a href="http://www.w3.org/TR/emotionml/#s2.3.2"
- * target="_blank">Expressed-Through in EmotionML</a>
+ * target="_blank">Expressed-Through in EmotionML</a>.
  * @author Alexandre Denis
  */
 public class ExpressedThrough
@@ -39,7 +39,8 @@ public class ExpressedThrough
 			this.str = str;
 		}
 
-		/** 
+
+		/**
 		 * Returns a xsd:NMTOKEN value corresponding to this Type.
 		 */
 		@Override
@@ -89,6 +90,16 @@ public class ExpressedThrough
 
 
 	/**
+	 * Deep copies the given ExpressedThrough.
+	 */
+	public ExpressedThrough(ExpressedThrough expressedThrough)
+	{
+		this.type = expressedThrough.type;
+		this.value = expressedThrough.value;
+	}
+
+
+	/**
 	 * Returns the Type of this ExpressedThrough if it has been defined.
 	 * @return the Type of this ExpressedThrough or null if it has not been defined
 	 */
@@ -110,7 +121,8 @@ public class ExpressedThrough
 
 	/**
 	 * Returns a String value of this ExpressedThrough.
-	 * @return the type value if defined, else the open value if defined or the constant value "other"
+	 * @return the type value if defined, else the open value if defined or the constant value
+	 *         "other"
 	 */
 	@Override
 	public String toString()
