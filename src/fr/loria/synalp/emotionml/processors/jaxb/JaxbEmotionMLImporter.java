@@ -44,7 +44,7 @@ public class JaxbEmotionMLImporter extends EmotionMLImporter
 	/**
 	 * Adds the given class for doing the unmarshalling. This method adds the given info classe and
 	 * recreates the JAXBContext.
-	 * @param classes
+	 * @param c a daughter class of Info
 	 * @return this JaxbEmotionMLImporter for chaining
 	 */
 	public JaxbEmotionMLImporter addInfoClass(Class<? extends Info> c)
