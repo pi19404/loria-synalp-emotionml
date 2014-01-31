@@ -263,6 +263,16 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 	}
 
 
+	/**
+	 * Sets the id of this Emotion.
+	 * @param id
+	 */
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+
+
 /////// Version
 
 	/**
@@ -488,4 +498,5 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 			ret.append("info=").append(getInfo()).append(" ");
 		return ret.toString().trim();
 	}
+
 }
