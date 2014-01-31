@@ -127,6 +127,45 @@ public class EmotionMLDocument extends VocabularyReferrer
 	}
 
 
+	/**
+	 * Moves the vocabularies references from the emotion level to this document level if all the
+	 * emotions refer to the same vocabularies. If some emotions refer to different vocabularies, or
+	 * if they refer to different vocabularies than this document, this method does nothing and
+	 * returns false. This method alters vocabularies references of this document and of the
+	 * emotions it contains.
+	 * @return false if there are discrepancies in vocabularies references that prevent pushing
+	 * them to the document level, true if the operation has been performed
+	 */
+	public boolean pushVocabulariesUpward()
+	{
+		Map<VocabularyType, URI> uris = new HashMap<VocabularyType, URI>(getAllDescriptorSetURIs());
+
+		// check discrepancies in emotion uris
+		for(EmotionNode node : emotionNodes)
+			if (node instanceof Emotion)
+			{
+				Emotion emotion = (Emotion) node;
+				for(VocabularyType type : VocabularyType.values())
+					if (emotion.hasVocabularySetURI(type))
+					{
+						URI emoURI = emotion.getDescriptorSetURI(type);
+						if (uris.containsKey(type) && !uris.get(type).equals(emoURI))
+							return false;
+						uris.put(type, emoURI);
+					}
+			}
+
+		// once we're sure there is no conflict, do the modifications
+		for(EmotionNode node : emotionNodes)
+			if (node instanceof Emotion)
+				for(VocabularyType type : VocabularyType.values())
+					((Emotion) node).unsetDescriptorSetURI(type);
+
+		setAllDescriptorSetURIs(uris);
+		return true;
+	}
+
+
 ///// for chaining
 
 	@Override
