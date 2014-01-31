@@ -28,6 +28,7 @@ public class EmotionMLImporter extends EmotionMLProcessor
 {
 	private EmotionMLReader reader = new XMLEmotionMLReader();
 
+
 	/**
 	 * Creates a new EmotionMLImporter with a default EmotionMLValidator.
 	 */
@@ -45,7 +46,6 @@ public class EmotionMLImporter extends EmotionMLProcessor
 		super(validator);
 	}
 
-	
 
 	/**
 	 * Returns the currently defined EmotionMLReader.
@@ -233,6 +233,11 @@ public class EmotionMLImporter extends EmotionMLProcessor
 	public Emotion importEmotion(Element element) throws EmotionMLException
 	{
 		Emotion ret = new Emotion();
+		
+		// id
+		String id = element.getAttribute("id");
+		if (!id.equals(""))
+			ret.setId(id);
 
 		// descriptor sets
 		for(VocabularyType type : VocabularyType.values())
