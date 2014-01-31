@@ -12,7 +12,8 @@ public class Dimension extends EmotionDescriptor
 	/**
 	 * Creates a new Dimension with given name and value.
 	 * @param name
-	 * @param value a float value between 0 and 1 (no check is performed at this point, see {@link fr.loria.synalp.emotionml.descriptors.EmotionDescriptor})
+	 * @param value a float value between 0 and 1 (no check is performed at this point, see
+	 *            {@link fr.loria.synalp.emotionml.descriptors.EmotionDescriptor})
 	 */
 	public Dimension(String name, Float value)
 	{
@@ -42,19 +43,23 @@ public class Dimension extends EmotionDescriptor
 
 
 	/**
-	 * Creates a new Dimension by copying the given Dimension but setting the given value.
+	 * Creates a new Dimension by copying the given Dimension but setting the given value. Note: it
+	 * does not copy the potential trace of the given dimension.
 	 * @param dimension
-	 * @param value a float value between 0 and 1 (no check is performed at this point, see {@link fr.loria.synalp.emotionml.descriptors.EmotionDescriptor})
+	 * @param value a float value between 0 and 1 (no check is performed at this point, see
+	 *            {@link fr.loria.synalp.emotionml.descriptors.EmotionDescriptor})
 	 */
 	public Dimension(Dimension dimension, Float value)
 	{
 		super(dimension);
 		setValue(value);
+		setTrace(null);
 	}
 
 
 	/**
-	 * Creates a new Dimension by copying the given Dimension but setting the given trace.
+	 * Creates a new Dimension by copying the given Dimension but setting the given trace. Note: it
+	 * does not copy the potential value of the given dimension.
 	 * @param dimension
 	 * @param trace
 	 */
@@ -62,5 +67,6 @@ public class Dimension extends EmotionDescriptor
 	{
 		super(dimension);
 		setTrace(trace);
+		setValue(null);
 	}
 }
