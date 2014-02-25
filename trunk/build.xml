@@ -32,7 +32,7 @@
 		</javac>
 	</target>
 
-	<target name="jar" depends="build" description="packages the librayr including sources and all dependencies">
+	<target name="jar" depends="build" description="packages the library including sources and all dependencies">
 		<jar destfile="loria-synalp-emotionml.jar">
 			<fileset dir="bin"/>
 			<zipgroupfileset dir="lib" includes="**/*.jar"/>
