@@ -1,16 +1,23 @@
 package fr.loria.synalp.emotionml.descriptors;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * A <a href="http://www.w3.org/TR/emotionml/#s2.5.2" target="_blank">Trace in EmotionML</a>.
  * @author Alexandre Denis
  */
-public class Trace
+@SuppressWarnings("serial")
+public class Trace implements Serializable
 {
 	private float frequency;
 	private float[] samples;
 
+	@SuppressWarnings("unused")
+	private Trace()
+	{
+		
+	}
 
 	/**
 	 * @param frequency
@@ -23,10 +30,16 @@ public class Trace
 	}
 
 
+	/**
+	 * Copy constructor.
+	 * @param trace
+	 */
 	public Trace(Trace trace)
 	{
 		this.frequency = trace.getFrequency();
-		this.samples = Arrays.copyOf(trace.getSamples(), trace.getSamples().length);
+		this.samples = new float[trace.getSamples().length];
+		for(int i = 0; i < samples.length; i++)
+			samples[i] = trace.getSamples()[i];
 	}
 
 
@@ -65,7 +78,7 @@ public class Trace
 		this.samples = samples;
 	}
 
-	
+
 	@Override
 	public String toString()
 	{

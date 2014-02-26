@@ -1,5 +1,6 @@
 package fr.loria.synalp.emotionml.vocabularies;
 
+import java.io.Serializable;
 import java.util.*;
 
 import fr.loria.synalp.emotionml.info.*;
@@ -8,12 +9,19 @@ import fr.loria.synalp.emotionml.info.*;
  * A Vocabulary describes a list of possible values for a descriptor type.
  * @author Alexandre Denis
  */
-public class Vocabulary extends InfoCarrier
+@SuppressWarnings("serial")
+public class Vocabulary extends InfoCarrier implements Serializable
 {
-	private final String id;
-	private final VocabularyType type;
-	private final Map<String, VocabularyItem> items; // <name, item>
+	private String id;
+	private VocabularyType type;
+	private Map<String, VocabularyItem> items; // <name, item>
 
+
+	@SuppressWarnings("unused")
+	private Vocabulary()
+	{
+		
+	}
 
 	/**
 	 * Creates a Vocabulary with given id and descriptor type. Warning: for serialization purposes a

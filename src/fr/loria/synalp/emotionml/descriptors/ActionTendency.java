@@ -7,8 +7,15 @@ import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
  * @author Alexandre Denis
  *
  */
+@SuppressWarnings("serial")
 public class ActionTendency extends EmotionDescriptor
 {
+	
+	@SuppressWarnings("unused")
+	private ActionTendency()
+	{
+		
+	}
 
 	/**
 	 * Creates a new ActionTendency with given name.

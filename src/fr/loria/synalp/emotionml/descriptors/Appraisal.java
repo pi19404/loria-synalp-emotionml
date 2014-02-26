@@ -7,9 +7,16 @@ import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
  * @author Alexandre Denis
  *
  */
+@SuppressWarnings("serial")
 public class Appraisal extends EmotionDescriptor
 {
 
+	@SuppressWarnings("unused")
+	private Appraisal()
+	{
+		
+	}
+	
 	/**
 	 * Creates a new Appraisal with given name.
 	 * @param name the name of the new Appraisal

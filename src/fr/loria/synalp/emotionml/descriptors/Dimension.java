@@ -6,9 +6,15 @@ import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
  * A <a href="http://www.w3.org/TR/emotionml/#s2.2.2" target="_blank">Dimension in EmotionML</a>.
  * @author Alexandre Denis
  */
+@SuppressWarnings("serial")
 public class Dimension extends EmotionDescriptor
 {
-
+	@SuppressWarnings("unused")
+	private Dimension()
+	{
+		
+	}
+	
 	/**
 	 * Creates a new Dimension with given name and value.
 	 * @param name

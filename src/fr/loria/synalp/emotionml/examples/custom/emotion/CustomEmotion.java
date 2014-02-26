@@ -8,10 +8,17 @@ import fr.loria.synalp.emotionml.vocabularies.predefined.FsreDimensions;
  * A CustomEmotion is an example of an Emotion that provides an easy access to a valence dimension.
  * @author Alexandre Denis
  */
+@SuppressWarnings("serial")
 class CustomEmotion extends Emotion
 {
 	private Dimension valenceDimension;
 
+	// for serialization
+	@SuppressWarnings("unused")
+	private CustomEmotion()
+	{
+		
+	}
 	
 	public CustomEmotion(float valence)
 	{
