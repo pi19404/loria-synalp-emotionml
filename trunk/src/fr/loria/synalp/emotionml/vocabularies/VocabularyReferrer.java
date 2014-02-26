@@ -205,7 +205,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setActionTendencySetURI(new URI(uri));
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}
@@ -227,7 +227,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setAppraisalSetURI(new URI(uri));
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}
@@ -249,7 +249,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setCategorySetURI(new URI(uri));
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}
@@ -271,7 +271,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setDescriptorSetURI(type, new URI(uri));
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}
@@ -293,7 +293,7 @@ public class VocabularyReferrer extends InfoCarrier
 		{
 			return setDimensionSetURI(new URI(uri));
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}

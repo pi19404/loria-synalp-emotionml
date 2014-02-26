@@ -29,7 +29,7 @@ public class EmotionMLDocument extends VocabularyReferrer
 		{
 			return new URI(uri);
 		}
-		catch (URISyntaxException e)
+		catch (Exception e)
 		{
 			return null;
 		}
