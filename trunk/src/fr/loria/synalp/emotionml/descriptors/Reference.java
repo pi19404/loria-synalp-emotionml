@@ -1,5 +1,6 @@
 package fr.loria.synalp.emotionml.descriptors;
 
+import java.io.Serializable;
 import java.net.URI;
 
 /**
@@ -7,7 +8,8 @@ import java.net.URI;
  * target="_blank">Reference in EmotionML</a>.
  * @author Alexandre Denis
  */
-public class Reference
+@SuppressWarnings("serial")
+public class Reference implements Serializable
 {
 	public enum Role
 	{
@@ -45,6 +47,12 @@ public class Reference
 	private Role role;
 	private String mediaType;
 
+	
+	@SuppressWarnings("unused")
+	private Reference()
+	{
+		
+	}
 
 	/**
 	 * Creates a new Reference with given URI.

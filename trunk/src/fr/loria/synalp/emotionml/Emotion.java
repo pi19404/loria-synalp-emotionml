@@ -26,6 +26,7 @@ import fr.loria.synalp.emotionml.info.Info;
  * @see fr.loria.synalp.emotionml.descriptors.EmotionDescriptor
  * @see fr.loria.synalp.emotionml.vocabularies.VocabularyReferrer
  */
+@SuppressWarnings("serial")
 public class Emotion extends VocabularyReferrer implements EmotionNode
 {
 	private String id;
@@ -36,6 +37,11 @@ public class Emotion extends VocabularyReferrer implements EmotionNode
 	private List<EmotionDescriptor> descriptors = new ArrayList<EmotionDescriptor>();
 	private List<ExpressedThrough> expressedThrough = new ArrayList<ExpressedThrough>();
 
+	// for serialization
+	public Emotion()
+	{
+		
+	}
 
 	/**
 	 * Creates a new Emotion with given EmotionDescriptor.

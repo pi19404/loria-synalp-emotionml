@@ -1,13 +1,20 @@
 package fr.loria.synalp.emotionml;
 
-
 /**
  * An EmotionText is simply a text.
  * @author Alexandre Denis
  */
+@SuppressWarnings("serial")
 public class EmotionText implements EmotionNode
 {
 	private String content;
+
+
+	@SuppressWarnings("unused")
+	private EmotionText()
+	{
+
+	}
 
 
 	/**
@@ -19,7 +26,7 @@ public class EmotionText implements EmotionNode
 		this.content = content;
 	}
 
-	
+
 	/**
 	 * Deep copies the given EmotionText.
 	 */
@@ -27,7 +34,7 @@ public class EmotionText implements EmotionNode
 	{
 		this.content = text.getContent();
 	}
-	
+
 
 	/**
 	 * Returns the text content of this EmotionText.

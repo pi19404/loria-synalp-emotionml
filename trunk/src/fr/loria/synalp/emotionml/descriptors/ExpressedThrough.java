@@ -1,5 +1,7 @@
 package fr.loria.synalp.emotionml.descriptors;
 
+import java.io.Serializable;
+
 /**
  * ExpressedThrough describes the modality through which an emotion is produced. It is either
  * represented with a Type, that provides a convenient enumeration of the most common modalities or
@@ -7,10 +9,11 @@ package fr.loria.synalp.emotionml.descriptors;
  * target="_blank">Expressed-Through in EmotionML</a>.
  * @author Alexandre Denis
  */
-public class ExpressedThrough
+@SuppressWarnings("serial")
+public class ExpressedThrough implements Serializable
 {
-	private final String value;
-	private final Type type;
+	private String value;
+	private Type type;
 
 
 	/**
@@ -65,6 +68,12 @@ public class ExpressedThrough
 		return new ExpressedThrough(string);
 	}
 
+	
+	@SuppressWarnings("unused")
+	private ExpressedThrough()
+	{
+		
+	}
 
 	/**
 	 * Creates a new ExpressedThrough with given type.

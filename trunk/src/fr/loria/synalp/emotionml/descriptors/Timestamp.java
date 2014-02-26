@@ -1,5 +1,6 @@
 package fr.loria.synalp.emotionml.descriptors;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.*;
 
@@ -8,7 +9,8 @@ import java.net.*;
  * href="http://www.w3.org/TR/emotionml/#s2.4.2.4" target="_blank">Timing in EmotionML</a>.
  * @author Alexandre Denis
  */
-public class Timestamp
+@SuppressWarnings("serial")
+public class Timestamp implements Serializable
 {
 	/**
 	 * An anchor point whose value is either START or END.

@@ -7,9 +7,15 @@ import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
  * @author Alexandre Denis
  *
  */
+@SuppressWarnings("serial")
 public class Category extends EmotionDescriptor
 {
-
+	@SuppressWarnings("unused")
+	private Category()
+	{
+		
+	}
+	
 	/**
 	 * Creates a new Category with given name.
 	 * @param name

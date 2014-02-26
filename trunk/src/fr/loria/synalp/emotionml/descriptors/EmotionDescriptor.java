@@ -1,5 +1,6 @@
 package fr.loria.synalp.emotionml.descriptors;
 
+import java.io.Serializable;
 import java.net.URI;
 
 import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
@@ -19,14 +20,22 @@ import fr.loria.synalp.emotionml.vocabularies.VocabularyType;
  * @author Alexandre Denis
  * @see fr.loria.synalp.emotionml.Emotion
  */
-public class EmotionDescriptor
+@SuppressWarnings("serial")
+public class EmotionDescriptor implements Serializable
 {
 	private URI uri;
 	private Float value;
 	private Trace trace;
 	private Float confidence;
-	private final String name;
-	private final VocabularyType type;
+	private String name;
+	private VocabularyType type;
+
+
+	// for serialization
+	protected EmotionDescriptor()
+	{
+
+	}
 
 
 	/**

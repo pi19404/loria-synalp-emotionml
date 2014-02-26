@@ -1,15 +1,23 @@
 package fr.loria.synalp.emotionml.vocabularies;
 
+import java.io.Serializable;
+
 import fr.loria.synalp.emotionml.info.*;
 
 /**
  * A VocabularyItem is an item inside a Vocabulary.
  * @author Alexandre Denis
  */
-public final class VocabularyItem extends InfoCarrier
+@SuppressWarnings("serial")
+public final class VocabularyItem extends InfoCarrier implements Serializable
 {
-	private final String name;
+	private String name;
 
+	@SuppressWarnings("unused")
+	private VocabularyItem()
+	{
+		
+	}
 
 	/**
 	 * @param name
