@@ -6,6 +6,7 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#fsre-dimensions</a>
 */
+@SuppressWarnings("serial")
 public final class FsreDimensions extends Vocabulary
 {
 	public static final Dimension UNPREDICTABILITY = new Dimension("unpredictability", 1.0f);

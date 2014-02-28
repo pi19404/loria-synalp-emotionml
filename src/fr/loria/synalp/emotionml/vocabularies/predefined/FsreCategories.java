@@ -1,11 +1,13 @@
 package fr.loria.synalp.emotionml.vocabularies.predefined;
 import java.net.URI;
+
 import fr.loria.synalp.emotionml.descriptors.*;
 import fr.loria.synalp.emotionml.vocabularies.*;
 
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#fsre-categories" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#fsre-categories</a>
 */
+@SuppressWarnings("serial")
 public final class FsreCategories extends Vocabulary
 {
 	public static final Category DESPAIR = new Category("despair");

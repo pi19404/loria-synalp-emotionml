@@ -6,6 +6,7 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#everyday-categories" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#everyday-categories</a>
 */
+@SuppressWarnings("serial")
 public final class EverydayCategories extends Vocabulary
 {
 	public static final Category SATISFIED = new Category("satisfied");

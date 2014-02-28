@@ -6,6 +6,7 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#frijda-categories" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#frijda-categories</a>
 */
+@SuppressWarnings("serial")
 public final class FrijdaCategories extends Vocabulary
 {
 	public static final Category DISGUST = new Category("disgust");

@@ -6,10 +6,11 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals</a>
 */
+@SuppressWarnings("serial")
 public final class SchererAppraisals extends Vocabulary
 {
-	public static final Appraisal OUTCOME_PROBABILITY = new Appraisal("outcome-probability");
 	public static final Appraisal AGENT_OTHER = new Appraisal("agent-other");
+	public static final Appraisal OUTCOME_PROBABILITY = new Appraisal("outcome-probability");
 	public static final Appraisal CONTROL = new Appraisal("control");
 	public static final Appraisal GOAL_CONDUCIVENESS = new Appraisal("goal-conduciveness");
 	public static final Appraisal FAMILIARITY = new Appraisal("familiarity");
@@ -33,8 +34,8 @@ public final class SchererAppraisals extends Vocabulary
 	{
 		try
 		{
-			OUTCOME_PROBABILITY.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
 			AGENT_OTHER.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
+			OUTCOME_PROBABILITY.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
 			CONTROL.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
 			GOAL_CONDUCIVENESS.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
 			FAMILIARITY.setURI(new URI("http://www.w3.org/TR/emotion-voc/xml#scherer-appraisals"));
@@ -60,8 +61,8 @@ public final class SchererAppraisals extends Vocabulary
 	public SchererAppraisals()
 	{
 		super("scherer-appraisals", VocabularyType.APPRAISAL);
-		addItem("outcome-probability");
 		addItem("agent-other");
+		addItem("outcome-probability");
 		addItem("control");
 		addItem("goal-conduciveness");
 		addItem("familiarity");
