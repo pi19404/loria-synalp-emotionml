@@ -6,6 +6,7 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#big6" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#big6</a>
 */
+@SuppressWarnings("serial")
 public final class Big6 extends Vocabulary
 {
 	public static final Category DISGUST = new Category("disgust");

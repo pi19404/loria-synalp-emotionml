@@ -6,6 +6,7 @@ import fr.loria.synalp.emotionml.vocabularies.*;
 /**
 	Auto-generated class corresponding to vocabulary <a href="http://www.w3.org/TR/emotion-voc/xml#occ-appraisals" target="_blank"/>http://www.w3.org/TR/emotion-voc/xml#occ-appraisals</a>
 */
+@SuppressWarnings("serial")
 public final class OccAppraisals extends Vocabulary
 {
 	public static final Appraisal STRENGTH_OF_IDENTIFICATION = new Appraisal("strength-of-identification");

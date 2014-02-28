@@ -49,6 +49,8 @@ class PredefinedVocabulariesGenerator
 		StringBuilder str = new StringBuilder();
 		str.append("package fr.loria.synalp.emotionml.vocabularies.predefined;\n");
 		str.append("\n");
+		str.append("import fr.loria.synalp.emotionml.vocabularies.*;\n");
+		str.append("@SuppressWarnings(\"serial\")\n");
 		str.append("public final class PredefinedVocabularies\n");
 		str.append("{\n");
 		for(Vocabulary vocabulary : document.getVocabularies())
@@ -77,12 +79,13 @@ class PredefinedVocabulariesGenerator
 		str.append("package fr.loria.synalp.emotionml.vocabularies.predefined;\n");
 		str.append("import java.net.URI;\n");
 		str.append("import fr.loria.synalp.emotionml.descriptors.*;\n");
-		str.append("import fr.loria.synalp.emotionml.vocabularies.Vocabulary;\n");
+		str.append("import fr.loria.synalp.emotionml.vocabularies.*;\n");
 		str.append("\n");
 		str.append("/**\n");
 		str.append("\tAuto-generated class corresponding to vocabulary <a href=\"").append(uri).append("\" target=\"_blank\"/>");
 		str.append(uri).append("</a>\n");
 		str.append("*/\n");
+		str.append("@SuppressWarnings(\"serial\")\n");
 		str.append("public final class ").append(className).append(" extends Vocabulary\n");
 		str.append("{\n");
 
