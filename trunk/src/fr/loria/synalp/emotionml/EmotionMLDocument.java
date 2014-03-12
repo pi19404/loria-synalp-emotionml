@@ -176,4 +176,116 @@ public class EmotionMLDocument extends VocabularyReferrer implements Serializabl
 		return (EmotionMLDocument) super.setInfo(info);
 	}
 
+
+	@Override
+	public EmotionMLDocument setActionTendencySetURI(URI uri)
+	{
+		return (EmotionMLDocument) super.setActionTendencySetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setAppraisalSetURI(URI uri)
+	{
+		return (EmotionMLDocument) super.setAppraisalSetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setCategorySetURI(URI uri)
+	{
+		return (EmotionMLDocument) super.setCategorySetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setDescriptorSetURI(VocabularyType type, URI uri)
+	{
+		return (EmotionMLDocument) super.setDescriptorSetURI(type, uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setDimensionSetURI(URI uri)
+	{
+		return (EmotionMLDocument) super.setDimensionSetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setActionTendencySetURI(String uri)
+	{
+		return (EmotionMLDocument) super.setActionTendencySetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setAppraisalSetURI(String uri)
+	{
+		return (EmotionMLDocument) super.setAppraisalSetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setCategorySetURI(String uri)
+	{
+		return (EmotionMLDocument) super.setCategorySetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setDescriptorSetURI(VocabularyType type, String uri)
+	{
+		return (EmotionMLDocument) super.setDescriptorSetURI(type, uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setDimensionSetURI(String uri)
+	{
+		return (EmotionMLDocument) super.setDimensionSetURI(uri);
+	}
+
+
+	@Override
+	public EmotionMLDocument setAllDescriptorSetURIs(Map<VocabularyType, URI> descriptorsSetURIs)
+	{
+		return (EmotionMLDocument) super.setAllDescriptorSetURIs(descriptorsSetURIs);
+	}
+
+
+	@Override
+	public EmotionMLDocument unsetActionTendencySetURI()
+	{
+		return (EmotionMLDocument) super.unsetActionTendencySetURI();
+	}
+
+
+	@Override
+	public EmotionMLDocument unsetAppraisalSetURI()
+	{
+		return (EmotionMLDocument) super.unsetAppraisalSetURI();
+	}
+
+
+	@Override
+	public EmotionMLDocument unsetCategorySetURI()
+	{
+		return (EmotionMLDocument) super.unsetCategorySetURI();
+	}
+
+
+	@Override
+	public EmotionMLDocument unsetDimensionSetURI()
+	{
+		return (EmotionMLDocument) super.unsetDimensionSetURI();
+	}
+
+
+	@Override
+	public EmotionMLDocument unsetDescriptorSetURI(VocabularyType type)
+	{
+		return (EmotionMLDocument) super.unsetDescriptorSetURI(type);
+	}
+
 }
